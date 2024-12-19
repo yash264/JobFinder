@@ -22,7 +22,7 @@ function Register() {
         setLoading(true);
 
         try{
-            const response = await axios.post('http://localhost:4502/api/register',
+            const response = await axios.post('https://jobFinderserver.onrender.com/api/register',
                 {  
                     name:name,
                     email:email,
@@ -62,7 +62,7 @@ function Register() {
 
         try {
 
-            const response = await axios.post('http://localhost:4502/api/verify-token', {}, {
+            const response = await axios.post('https://jobFinderserver.onrender.com/api/verify-token', {}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

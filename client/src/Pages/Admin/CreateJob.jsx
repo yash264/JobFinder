@@ -26,7 +26,7 @@ function CreateJob() {
     const fetchUserData = async () => {
 
         try {
-            const response = await axios.get('http://localhost:4502/api/fetchJob',
+            const response = await axios.get('https://jobFinderserver.onrender.com/api/fetchJob',
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ function CreateJob() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4502/api/jobCreate',
+            const response = await axios.post('https://jobFinderserver.onrender.com/api/jobCreate',
                 {
                     role: role,
                     eligibility: eligibility,
@@ -89,7 +89,7 @@ function CreateJob() {
     const deleteJob = async(role) => {
 
         try {
-            const response = await axios.post('http://localhost:4502/api/deleteJob',
+            const response = await axios.post('https://jobFinderserver.onrender.com/api/deleteJob',
                 {
                     role: role,
                 },

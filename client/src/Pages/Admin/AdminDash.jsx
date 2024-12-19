@@ -18,7 +18,7 @@ function AdminDash() {
     useEffect(() => {
         const fetchAdminData = async () => {
             try {
-                const response = await axios.get('http://localhost:4502/api/fetchAdmin',
+                const response = await axios.get('https://jobFinderserver.onrender.com/api/fetchAdmin',
                     {
                         headers: {
                             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ function AdminDash() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4502/api/updateAdmin',
+            const response = await axios.post('https://jobFinderserver.onrender.com/api/updateAdmin',
                 {
                     ferm: ferm,
                     gmail: gmail,
@@ -127,7 +127,7 @@ function AdminDash() {
                             <form class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Ferm Name</label>
-                                    <input type="text" class="form-control" onChange={(e) => setFerm(e.target.value)} placeholder="Enter your Name" />
+                                    <input type="text" class="form-control" onChange={(e) => setFerm(e.target.value)} placeholder="Enter your Ferm Name" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Email</label>

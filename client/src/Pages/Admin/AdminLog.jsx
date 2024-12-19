@@ -21,7 +21,7 @@ function AdminLog() {
         setLoading(true);
 
         try{
-            const response = await axios.post('http://localhost:4502/api/adminLogin',
+            const response = await axios.post('https://jobFinderserver.onrender.com/api/adminLogin',
                 { 
                     gmail:gmail,
                     password:password

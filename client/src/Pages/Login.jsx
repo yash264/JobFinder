@@ -21,7 +21,7 @@ function Login() {
         setLoading(true);
 
         try{
-            const response = await axios.post('http://localhost:4502/api/login',
+            const response = await axios.post('https://jobFinderserver.onrender.com/api/login',
                 { 
                     email:email,
                     password:password

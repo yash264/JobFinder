@@ -7,7 +7,6 @@ const cors = require("cors");
 const hbs = require("hbs");   //partial ke liye
 const path = require("path");
 require("./db/connection");
-const bcrypt = require("bcryptjs")
 const cookieParser = require("cookie-parser")
 
 //diff between encryption and hashing -> encryption is bad , it is two sided , it is decodable , but hashig is good , it is one sided , and even in hahsing , bcrypt is good one..
@@ -19,7 +18,7 @@ const JobRoute = require("./routes/Job.route");
 const ApplicationRoute = require("./routes/Application.route");
 
 const corsOptions ={
-    origin: "http://localhost:3000",
+    origin: "https://jobFinder-rust.vercel.app",
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
 }; 

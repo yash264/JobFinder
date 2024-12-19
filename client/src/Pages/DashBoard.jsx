@@ -20,7 +20,7 @@ function DashBoard() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('http://localhost:4502/api/fetchUser',
+                const response = await axios.get('https://jobFinderserver.onrender.com/api/fetchUser',
                     {
                         headers: {
                             'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function DashBoard() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4502/api/updateUser',
+            const response = await axios.post('https://jobFinderserver.onrender.com/api/updateUser',
                 {
                     name: name,
                     gender: gender,
@@ -171,6 +171,10 @@ function DashBoard() {
                                     </select>
                                 </div>
                                 <div class="col-md-6">
+                                    <label for="inputCity" class="form-label">City</label>
+                                    <input type="text" class="form-control" onChange={(e) => setCity(e.target.value)} id="inputCity" placeholder="Enter your City" />
+                                </div>
+                                <div class="col-md-6">
                                     <label for="inputState" class="form-label">State</label>
                                     <select id="inputState" onChange={(e) => setState(e.target.value)} class="form-select">
                                         <option selected>Choose...</option>
@@ -184,10 +188,6 @@ function DashBoard() {
                                         <option onChange={(e) => setState(e.target.value)} >Uttarakhand</option>
                                         <option onChange={(e) => setState(e.target.value)}>Other's</option>
                                     </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" onChange={(e) => setCity(e.target.value)} id="inputCity" placeholder="Enter your City" />
                                 </div>
                             </form>
                         </div>
