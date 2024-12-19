@@ -18,7 +18,7 @@ const JobRoute = require("./routes/Job.route");
 const ApplicationRoute = require("./routes/Application.route");
 
 const corsOptions ={
-    origin: "https://jobFinder-rust.vercel.app",
+    origin: "https://jobfinder-meta.vercel.app",
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
 }; 
