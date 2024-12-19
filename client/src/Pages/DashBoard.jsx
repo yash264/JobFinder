@@ -20,7 +20,7 @@ function DashBoard() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('https://jobFinderserver.onrender.com/api/fetchUser',
+                const response = await axios.get('https://jobfinderserver.onrender.com/api/fetchUser',
                     {
                         headers: {
                             'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function DashBoard() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://jobFinderserver.onrender.com/api/updateUser',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/updateUser',
                 {
                     name: name,
                     gender: gender,

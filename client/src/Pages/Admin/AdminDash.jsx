@@ -18,7 +18,7 @@ function AdminDash() {
     useEffect(() => {
         const fetchAdminData = async () => {
             try {
-                const response = await axios.get('https://jobFinderserver.onrender.com/api/fetchAdmin',
+                const response = await axios.get('https://jobfinderserver.onrender.com/api/fetchAdmin',
                     {
                         headers: {
                             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ function AdminDash() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://jobFinderserver.onrender.com/api/updateAdmin',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/updateAdmin',
                 {
                     ferm: ferm,
                     gmail: gmail,

@@ -15,7 +15,7 @@ function PastApplication() {
     const handleSubmit = async () => {
 
         try {
-            const response = await axios.get('https://jobFinderserver.onrender.com/api/fetchPastApplication',
+            const response = await axios.get('https://jobfinderserver.onrender.com/api/fetchPastApplication',
                 {
                     headers: {
                         'Content-Type': 'application/json',

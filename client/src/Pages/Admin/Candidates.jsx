@@ -18,7 +18,7 @@ function Candidates() {
 
     const fetchAdminData = async () => {
         try {
-            const response = await axios.post('https://jobFinderserver.onrender.com/api/fetchCandidates',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/fetchCandidates',
                 {
                     role: role,
                 },
@@ -42,7 +42,7 @@ function Candidates() {
 
     const confirmation = async (name, email, role) => {
         try {
-            const response = await axios.post('https://jobFinderserver.onrender.com/api/acceptConfirmation',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/acceptConfirmation',
                 {
                     name: name,
                     email: email,
@@ -73,7 +73,7 @@ function Candidates() {
 
     const fetchProfile = async (name, email, role) => {
         try {
-            const response = await axios.post('https://jobFinderserver.onrender.com/api/fetchProfile',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/fetchProfile',
                 {
                     name: name,
                     email: email,

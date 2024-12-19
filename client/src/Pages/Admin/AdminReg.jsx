@@ -22,7 +22,7 @@ function AdminReg() {
         setLoading(true);
 
         try{
-            const response = await axios.post('https://jobFinderserver.onrender.com/api/adminRegister',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/adminRegister',
                 {  
                     ferm:ferm,
                     gmail:gmail,
@@ -66,7 +66,7 @@ function AdminReg() {
 
         try {
 
-            const response = await axios.post('https://jobFinderserver.onrender.com/api/verifyToken', {}, {
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/verifyToken', {}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

@@ -18,7 +18,7 @@ function Notification() {
     const handleSubmit = async () => {
 
         try {
-            const response = await axios.get('https://jobFinderserver.onrender.com/api/fetchNotification',
+            const response = await axios.get('https://jobfinderserver.onrender.com/api/fetchNotification',
                 {
                     headers: {
                         'Content-Type': 'application/json',
