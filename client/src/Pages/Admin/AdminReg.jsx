@@ -14,10 +14,12 @@ function AdminReg() {
     const [ferm, setFerm] = useState([])
     const [gmail, setGmail] = useState([])
     const [password, setPassword] = useState([])
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try{
             const response = await axios.post('http://localhost:4502/api/adminRegister',
@@ -27,7 +29,7 @@ function AdminReg() {
                     password:password
                 }
             );
-            console.log(response.data);
+           
             if(response.data.message==="registered"){
                 toast.success("Registered Successfully");
             }
@@ -37,6 +39,7 @@ function AdminReg() {
             else{
                 toast.error("Some Error Occured");
             }
+            setLoading(false);
         }
         catch(error){
             console.log(error);
@@ -58,7 +61,6 @@ function AdminReg() {
 
     const checkToken = async () => {
         const token = localStorage.getItem('authToken');
-        console.log(token);
 
         if (!token) return false;
 
@@ -69,7 +71,7 @@ function AdminReg() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(response.data);
+            
             return { isValid: response.data.valid, data: response.data.data };
         } catch (error) {
             console.error(error);
@@ -87,19 +89,25 @@ function AdminReg() {
                             <form class="row g-3" onSubmit={handleSubmit} >
                                 <div class="col-md-8">
                                     <label for="name" class="form-label">Name of the Ferm</label>
-                                    <input type="text" class="form-control"  onChange={(e) => setFerm(e.target.value)} />
+                                    <input type="text" class="form-control" placeholder="Enter your Ferm Name" onChange={(e) => setFerm(e.target.value)} />
                                 </div>
                                 <div class="col-md-8">
                                     <label for="email" class="form-label">Organization Email</label>
-                                    <input type="email" class="form-control"  onChange={(e) => setGmail(e.target.value)} />
+                                    <input type="email" class="form-control" placeholder="Enter valid Email Id" onChange={(e) => setGmail(e.target.value)} />
                                 </div>
                                 <div class="col-md-8">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" onChange={(e) => setPassword(e.target.value)} />
+                                    <input type="password" class="form-control" placeholder="Enter your Password" onChange={(e) => setPassword(e.target.value)} />
                                 </div>
 
+                                {
+                                    loading && 
+                                        <div className="spinner-border text-primary mt-2" role="status">
+                                        </div>
+                                }
+
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Register</button>
+                                    <button type="submit" class="btn btn-outline-primary">Register</button>
                                     <button class="btn btn-outline-secondary" ><Link class="nav-link" to="../Admin/adminLog">Already Registered</Link></button>
                                 </div>
                             </form>

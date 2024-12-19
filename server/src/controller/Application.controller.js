@@ -139,11 +139,8 @@ const acceptConfirmation = async (req, res) => {
                 }
             );
 
-            console.log(req.body.name, req.body.email);
-            //console.log(accepted);
-
             // to send the mail
-            //congratulationMail(req.body.name, req.body.email, req.user.ferm, req.body.role);
+            congratulationMail(req.body.name, req.body.email, req.user.ferm, req.body.role);
 
             res.status(201).json({
                 success: true,

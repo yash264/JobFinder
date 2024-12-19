@@ -1,8 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import moment from "moment";
 import { Navbar } from "../Components/Navbar";
 import { Footer } from "../Components/Footer";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,7 +10,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 function PastApplication() {
 
-    const navigate = useNavigate()
     const [values, setValues] = useState([])
 
     const handleSubmit = async () => {
@@ -26,7 +23,7 @@ function PastApplication() {
                     }
                 }
             );
-            console.log(response.data.message);
+            
             setValues(response.data.message);
         }
         catch (error) {
@@ -38,9 +35,6 @@ function PastApplication() {
         handleSubmit();
     }, []);
 
-    const checkStatus = () => {
-
-    }
 
     return (
         <>

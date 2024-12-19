@@ -10,6 +10,7 @@ import DashBoard from "./Pages/DashBoard";
 import Notification from "./Pages/Notification";
 import ApplicationWindow from "./Pages/ApplicationWindow";
 import PastApplication from "./Pages/PastApplication";
+import UpgradeSkill from "./Pages/UpgradeSkill";
 
 import AdminReg from "./Pages/Admin/AdminReg";
 import AdminLog from "./Pages/Admin/AdminLog";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/User/notification" element={<Notification />}></Route>
           <Route path="/User/applicationWindow" element={<ApplicationWindow />}></Route>
           <Route path="/User/pastApplication" element={<PastApplication />}></Route>
+          <Route path="/User/upgradeSkill" element={<UpgradeSkill />}></Route>
 
           <Route path="/Admin/adminreg" element={<AdminReg />}></Route>
           <Route path="/Admin/adminLog" element={<AdminLog />}></Route>

@@ -86,7 +86,7 @@ function Candidates() {
                     }
                 }
             );
-            console.log(response.data);
+            
             setData(response.data.data);
             setMessage(response.data.message);
         }
@@ -125,7 +125,7 @@ function Candidates() {
                                     value.status === true ?
                                         <td><button className="btn btn-success" >Accepted</button></td>
                                         :
-                                        <td><button className="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#confirmation">Click here</button></td>
+                                        <td><button className="btn btn-outline-success" onClick={() => confirmation(value.name, value.email, role)}>Click here</button></td>
                                 }
 
                                 <td>
@@ -203,26 +203,6 @@ function Candidates() {
                                     </div>
                                 </td>
 
-
-                                <td>
-                                    <div class="modal fade" id="confirmation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmation</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Are you sure want to Accept the Application ?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" onClick={() => confirmation(value.name, value.email, role)}>Accept</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
                             </tr>
                         })
                     }

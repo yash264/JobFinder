@@ -26,7 +26,7 @@ function AdminDash() {
                         }
                     }
                 );
-                console.log(response.data.message);
+               
                 setFerm(response.data.message.ferm);
                 setGmail(response.data.message.gmail);
                 setPhone(response.data.message.adminDetails[0].phone);

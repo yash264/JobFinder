@@ -14,10 +14,12 @@ function Register() {
     const [name, setName] = useState([])
     const [email, setEmail] = useState([])
     const [password, setPassword] = useState([])
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try{
             const response = await axios.post('http://localhost:4502/api/register',
@@ -27,13 +29,13 @@ function Register() {
                     password:password
                 }
             );
-            console.log(response.data);
             if(response.data==="Email Already Exists"){
                 toast.error("Email Already Exists");
             }
             else if(response.data.message==="registered"){
-                toast.success("registered");
+                toast.success("Registered Successfully");
             }
+            setLoading(false);
         }
         catch(error){
             console.log(error);
@@ -55,7 +57,6 @@ function Register() {
 
     const checkToken = async () => {
         const token = localStorage.getItem('authToken');
-        console.log(token);
 
         if (!token) return false;
 
@@ -66,7 +67,7 @@ function Register() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(response.data);
+            
             return { isValid: response.data.valid, data: response.data.data };
         } catch (error) {
             console.error(error);
@@ -89,19 +90,25 @@ function Register() {
                             <form class="row g-3" onSubmit={handleSubmit} >
                                 <div class="col-md-8">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control"  onChange={(e) => setName(e.target.value)} />
+                                    <input type="text" class="form-control" placeholder="Enter your Name" onChange={(e) => setName(e.target.value)} />
                                 </div>
                                 <div class="col-md-8">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control"  onChange={(e) => setEmail(e.target.value)} />
+                                    <input type="email" class="form-control" placeholder="Enter valid Email Id" onChange={(e) => setEmail(e.target.value)} />
                                 </div>
                                 <div class="col-md-8">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" onChange={(e) => setPassword(e.target.value)} />
+                                    <input type="password" class="form-control" placeholder="Create your Password" onChange={(e) => setPassword(e.target.value)} />
                                 </div>
 
+                                {
+                                    loading && 
+                                        <div className="spinner-border text-primary mt-2" role="status">
+                                        </div>
+                                }
+
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Register</button>
+                                    <button type="submit" class="btn btn-outline-primary">Register</button>
                                     <button class="btn btn-outline-secondary" ><Link class="nav-link" to="../User/login">Already Registered</Link></button>
                                 </div>
                             </form>

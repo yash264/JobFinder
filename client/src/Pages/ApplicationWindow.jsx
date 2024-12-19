@@ -47,7 +47,7 @@ function ApplicationWindow() {
     }, []);
 
     const [document, setDocument] = useState('')
-    const [imageUrl, setImageUrl] = useState('');
+    const [imageUrl, setImageUrl] = useState('https://static.vecteezy.com/system/resources/previews/014/554/760/original/man-profile-negative-photo-anonymous-silhouette-human-head-businessman-worker-support-illustration-vector.jpg');
     const [pdfUrl, setPdfUrl] = useState('');
     const [yourself, setYourself] = useState('')
     const [uploadingPic, setUploadingPic] = useState(false)
@@ -209,6 +209,7 @@ function ApplicationWindow() {
                                     <br /><br />
                                     <input
                                         type="file"
+                                        accept="image/png, image/gif, image/jpeg"
                                         className="form-control"
                                         onChange={handleImageUpload}
                                         disabled={uploadingPic}
@@ -218,12 +219,13 @@ function ApplicationWindow() {
                                     </div>}
                                 </div>
                                 <div class="col-md-8">
-                                    <label class="form-label">Any Document</label>
+                                    <label class="form-label">Any Relevant Document</label>
                                     <input type="email" class="form-control" placeholder="Name of the Document" onChange={(e) => setDocument(e.target.value)} />
                                 </div>
-                                <div class="input-group mb-3">
+                                <div className="mb-3">
                                     <input
                                         type="file"
+                                        accept="application/pdf,application/vnd.ms-excel"
                                         className="form-control"
                                         onChange={handlePdfUpload}
                                         disabled={uploadingPdf}
@@ -234,7 +236,7 @@ function ApplicationWindow() {
                                 </div>
                                 <div class="form-floating">
                                     <textarea class="form-control" style={{ height: "100px" }} onChange={(e) => setYourself(e.target.value)} ></textarea>
-                                    <label for="floatingTextarea">Brief Intro about YourSelf</label>
+                                    <label for="floatingTextarea">Brief Intro about You & Your Skills</label>
                                 </div>
 
                                 <div class="col-md-6">

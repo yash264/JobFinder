@@ -32,7 +32,7 @@ export const Navbar = () => {
                             <Link class="nav-link" to="../User/pastApplication">Past Application</Link>
                         </li>
                         <li class="nav-item">
-                            <Link class="nav-link" to="../User/register">Machine Learning Part</Link>
+                            <Link class="nav-link" to="../User/upgradeSkill">Upgrade Your Skill</Link>
                         </li>
                     </ul>
                     <div>

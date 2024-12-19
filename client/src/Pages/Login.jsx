@@ -11,13 +11,14 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 function Login() {
 
-    const [name, setName] = useState([])
     const [email, setEmail] = useState([])
     const [password, setPassword] = useState([])
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         try{
             const response = await axios.post('http://localhost:4502/api/login',
@@ -33,6 +34,7 @@ function Login() {
                 toast.error("Please Register");
             }
             else if(response.data.message==="success"){
+                setLoading(false);
                 localStorage.setItem('authToken', response.data.token);
                 navigate("/User/Dashboard");
             }
@@ -57,15 +59,21 @@ function Login() {
                             <form class="row g-3" onSubmit={handleSubmit} >
                                 <div class="col-md-8">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control"  onChange={(e) => setEmail(e.target.value)} />
+                                    <input type="email" class="form-control" placeholder="Enter your Email Id" onChange={(e) => setEmail(e.target.value)} />
                                 </div>
                                 <div class="col-md-8">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" onChange={(e) => setPassword(e.target.value)} />
+                                    <input type="password" class="form-control" placeholder="Enter your Password" onChange={(e) => setPassword(e.target.value)} />
                                 </div>
 
+                                {
+                                    loading && 
+                                        <div className="spinner-border text-primary mt-2" role="status">
+                                        </div>
+                                }
+
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <button type="submit" class="btn btn-outline-primary">Login</button>
                                     <button class="btn btn-outline-secondary" ><Link class="nav-link" to="../User/register">New User</Link></button>
                                 </div>
                             </form>

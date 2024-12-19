@@ -26,7 +26,7 @@ function Notification() {
                     }
                 }
             );
-            console.log(response.data.data);
+            
             setValues(response.data.data);
         }
         catch (error) {
