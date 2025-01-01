@@ -9,6 +9,12 @@ Employment empowers people, enhances their self-esteem, and contributes to menta
 3. Implement JWT token to ensure security and privacy of the User.
 4. Designed a visual system which sends auto-generated email.
 
+
+# Live Link
+
+https://jobfinder-meta.vercel.app/
+
+
 # Tech Stack Used 
 
 React js , Node js, Express js & Mondodb.
