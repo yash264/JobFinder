@@ -86,7 +86,7 @@ function CreateJob() {
         navigate("../Admin/candidates", { state: { role: role } })
     }
 
-    const deleteJob = async(role) => {
+    const deleteJob = async (role) => {
 
         try {
             const response = await axios.post('https://jobfinderserver.onrender.com/api/deleteJob',
@@ -134,19 +134,27 @@ function CreateJob() {
                                     <form class="row g-3" >
                                         <div class="col-md-6">
                                             <label class="form-label">Role</label>
-                                            <input type="text" class="form-control" onChange={(e) => setRole(e.target.value)} />
+                                            <input type="text" class="form-control" onChange={(e) => setRole(e.target.value)} placeholder="Enter the Role" />
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Eligibility</label>
-                                            <input type="text" class="form-control" placeholder="Educational Qualification" onChange={(e) => setEligibility(e.target.value)} />
+                                            <label for="qualification" class="form-label" >Eligibility</label>
+                                            <select class="form-select" onChange={(e) => setEligibility(e.target.value)}>
+                                                <option selected >Choose...</option>
+                                                <option onChange={(e) => setEligibility(e.target.value)}>High School X</option>
+                                                <option onChange={(e) => setEligibility(e.target.value)}>Inter Mediate XII</option>
+                                                <option onChange={(e) => setEligibility(e.target.value)}>Bachelor's of Technology</option>
+                                                <option onChange={(e) => setEligibility(e.target.value)}>Bachelor's of Science</option>
+                                                <option onChange={(e) => setEligibility(e.target.value)}>Final Year of Graduation</option>
+                                                <option onChange={(e) => setEligibility(e.target.value)}>Other's</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="inputSkills" class="form-label">Skills Needed</label>
-                                            <input type="text" class="form-control" id="inputSkills" onChange={(e) => setSkills(e.target.value)} />
+                                            <label  class="form-label">Skills Needed</label>
+                                            <input type="text" class="form-control" onChange={(e) => setSkills(e.target.value)} placeholder="Enter the Skills Required" />
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Salary (in Rupees)</label>
-                                            <input type="number" class="form-control" onChange={(e) => setSalary(e.target.value)} />
+                                            <input type="number" class="form-control" onChange={(e) => setSalary(e.target.value)} placeholder="Enter the Salary" />
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Last Date to Apply</label>
@@ -191,10 +199,10 @@ function CreateJob() {
                             return <tr>
                                 <td>{value.role}</td>
                                 <td>{value.eligibility}</td>
-                                <td>{" ₹ "+value.salary}</td>
+                                <td>{" ₹ " + value.salary}</td>
                                 <td>{moment(value.lastDate).format('Do MMM YY, h:mm a')}</td>
                                 <td><button className="btn btn-outline-success" onClick={() => showCandidates(value.role)}>Click here</button></td>
-                                <td><CgClose onClick={() =>deleteJob(value.role)} /></td>
+                                <td><CgClose onClick={() => deleteJob(value.role)} /></td>
                             </tr>
                         })
                     }

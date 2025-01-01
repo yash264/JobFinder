@@ -97,8 +97,6 @@ const updateUser = async (req, res) => {
     try {
         const updatedUser = await personData.updateMany({_id:req.user.id},
             {
-                name:req.body.name,
-                email:req.body.email,
                 gender:req.body.gender,
             }
         );

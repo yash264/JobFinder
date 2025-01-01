@@ -11,6 +11,9 @@ const jobCreate = async (req, res) => {
             res.status(201).json("role must be unique");
         }
         else{
+            const scheduledTime = req.body.lastDate+'T'+req.body.lastTime+'Z';
+            const date = moment(scheduledTime).subtract(330, 'minute').format();
+
             const createdJob = new jobData({
                 refId:req.user.id,
                 ferm:req.user.ferm,
@@ -19,7 +22,7 @@ const jobCreate = async (req, res) => {
                 eligibility:req.body.eligibility,
                 skills:req.body.skills,
                 salary:req.body.salary,
-                lastDate:req.body.lastDate+"T"+req.body.lastTime+"Z",
+                lastDate:date,
                 aboutUs:req.body.aboutus
             })
             const created = await createdJob.save();

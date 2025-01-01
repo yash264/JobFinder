@@ -95,12 +95,6 @@ const fetchAdmin = async (req, res) => {
 
 const updateAdmin = async (req, res) => {
     try {
-        const updatedAdmin = await adminData.updateMany({_id:req.user.id},
-            {
-                ferm:req.body.ferm,
-                gmail:req.body.gmail,
-            }
-        );
         const adminDetail = await adminData.updateOne({_id:req.user.id},
             {    
                 $set:
@@ -116,8 +110,7 @@ const updateAdmin = async (req, res) => {
         );
         res.status(201).json({
             success: true,
-            data: "updated user profile",
-            message: updatedAdmin,
+            data: "updated",
             value: adminDetail,
         });
     }

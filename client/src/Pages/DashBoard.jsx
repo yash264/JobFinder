@@ -49,9 +49,7 @@ function DashBoard() {
         try {
             const response = await axios.post('https://jobfinderserver.onrender.com/api/updateUser',
                 {
-                    name: name,
                     gender: gender,
-                    email: email,
                     mobile: mobile,
                     qualification: qualification,
                     city: city,
@@ -139,20 +137,12 @@ function DashBoard() {
                         <div class="modal-body">
                             <form class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="inputName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" onChange={(e) => setName(e.target.value)} id="inputName" placeholder="Enter your Name" />
-                                </div>
-                                <div class="col-md-6">
                                     <label for="inputGender" class="form-label">Gender</label>
                                     <select id="inputGender" onChange={(e) => setGender(e.target.value)} class="form-select">
                                         <option selected>Choose...</option>
                                         <option onChange={(e) => setGender(e.target.value)} >Male</option>
                                         <option onChange={(e) => setGender(e.target.value)}>Female</option>
                                     </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" onChange={(e) => setEmail(e.target.value)} id="inputEmail" placeholder="Enter your Email" />
                                 </div>
                                 <div class="col-6">
                                     <label for="inputMobile" class="form-label">Mobile No.</label>
@@ -172,7 +162,7 @@ function DashBoard() {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" onChange={(e) => setCity(e.target.value)} id="inputCity" placeholder="Enter your City" />
+                                    <input type="text" class="form-control" onChange={(e) => setCity(e.target.value)}  placeholder="Enter your City" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputState" class="form-label">State</label>
@@ -181,6 +171,7 @@ function DashBoard() {
                                         <option onChange={(e) => setState(e.target.value)}>Uttar Pradesh</option>
                                         <option onChange={(e) => setState(e.target.value)} >Madhya Pradesh</option>
                                         <option onChange={(e) => setState(e.target.value)}>New Delhi</option>
+                                        <option onChange={(e) => setState(e.target.value)} >Karnataka</option>
                                         <option onChange={(e) => setState(e.target.value)}>Maharastra</option>
                                         <option onChange={(e) => setState(e.target.value)} >Haryana</option>
                                         <option onChange={(e) => setState(e.target.value)} >Rajasthan</option>
@@ -193,7 +184,7 @@ function DashBoard() {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={handleSubmit} >Save changes</button>
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" onClick={handleSubmit} >Save changes</button>
                         </div>
                     </div>
                 </div>

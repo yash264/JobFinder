@@ -46,8 +46,6 @@ function AdminDash() {
         try {
             const response = await axios.post('https://jobfinderserver.onrender.com/api/updateAdmin',
                 {
-                    ferm: ferm,
-                    gmail: gmail,
                     phone: phone,
                     city: city,
                     state: state,
@@ -125,14 +123,6 @@ function AdminDash() {
                         </div>
                         <div class="modal-body">
                             <form class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Ferm Name</label>
-                                    <input type="text" class="form-control" onChange={(e) => setFerm(e.target.value)} placeholder="Enter your Ferm Name" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" onChange={(e) => setGmail(e.target.value)} placeholder="Enter your Email" />
-                                </div>
                                 <div class="col-6">
                                     <label for="inputMobile" class="form-label">Mobile No.</label>
                                     <input type="number" class="form-control" onChange={(e) => setPhone(e.target.value)} placeholder="Enter Mobile Number" />
@@ -160,7 +150,7 @@ function AdminDash() {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={handleSubmit} >Save changes</button>
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" onClick={handleSubmit} >Save changes</button>
                         </div>
                     </div>
                 </div>

@@ -34,10 +34,10 @@ function Login() {
                 toast.error("Please Register");
             }
             else if(response.data.message==="success"){
-                setLoading(false);
                 localStorage.setItem('authToken', response.data.token);
                 navigate("/User/Dashboard");
             }
+            setLoading(false);
         }
         catch(error){
             console.log(error);
