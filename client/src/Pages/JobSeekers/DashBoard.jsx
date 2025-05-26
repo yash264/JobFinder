@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Navbar } from "../Components/Navbar";
-import { Footer } from "../Components/Footer";
-import { Profile } from "../SvgImage/Profile";
+import { Navbar } from "../../Components/Navbar";
+import { Footer } from "../../Components/Footer";
+import { Profile } from "../../SvgImage/Profile";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
