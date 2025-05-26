@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, Link }  from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+//import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/js/bootstrap.min.js";
 
 export const Navbar = () => {
 

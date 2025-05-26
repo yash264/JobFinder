@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route }  from "react-router-dom";
 import Home from "./Pages/Home";
-import Features from "./Pages/Features";
+/*import Features from "./Pages/Features";
 import About from "./Pages/About";
 
 import Register from "./Pages/Register";
@@ -16,16 +16,16 @@ import AdminReg from "./Pages/Admin/AdminReg";
 import AdminLog from "./Pages/Admin/AdminLog";
 import AdminDash from "./Pages/Admin/AdminDash";
 import CreateJob from "./Pages/Admin/CreateJob";
-import Candidates from "./Pages/Admin/Candidates";
+import Candidates from "./Pages/Admin/Candidates";*/
 //import "./App.css";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
+
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/features" element={<Features />}></Route>
+          {/*<Route path="/features" element={<Features />}></Route>
           <Route path="/about" element={<About />}></Route>
           
           <Route path="/User/register" element={<Register />}></Route>
@@ -40,9 +40,9 @@ function App() {
           <Route path="/Admin/adminLog" element={<AdminLog />}></Route>
           <Route path="/Admin/adminDash" element={<AdminDash />}></Route>
           <Route path="/Admin/createJob" element={<CreateJob />}></Route>
-          <Route path="/Admin/candidates" element={<Candidates />}></Route>
+          <Route path="/Admin/candidates" element={<Candidates />}></Route>*/}
         </Routes>
-      </BrowserRouter>
+  
     </>
   );
 }

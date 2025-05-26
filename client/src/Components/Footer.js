@@ -1,7 +1,7 @@
 import React from "react";
 import { ImLocation, ImEnvelop } from "react-icons/im";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+//import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/js/bootstrap.min.js";
 
 export const Footer = () => {
     return (
