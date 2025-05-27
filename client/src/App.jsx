@@ -1,10 +1,13 @@
 import React from "react";
-import { BrowserRouter, Routes, Route }  from "react-router-dom";
-import Home from "./Pages/Home";
-/*import Features from "./Pages/Features";
-import About from "./Pages/About";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Element } from 'react-scroll';
 
-import Register from "./Pages/Register";
+import Home from "./Pages/Home";
+import Features from "./Pages/Features";
+import About from "./Pages/About";
+import Footer from "./Components/Footer";
+
+/*import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import DashBoard from "./Pages/DashBoard";
 import Notification from "./Pages/Notification";
@@ -23,12 +26,12 @@ function App() {
   return (
     <>
 
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          {/*<Route path="/features" element={<Features />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          
-          <Route path="/User/register" element={<Register />}></Route>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/features" element={<Features />}></Route>
+        <Route path="/about" element={<About />}></Route>
+
+        {/*<Route path="/User/register" element={<Register />}></Route>
           <Route path="/User/login" element={<Login />}></Route>
           <Route path="/User/dashBoard" element={<DashBoard />}></Route>
           <Route path="/User/notification" element={<Notification />}></Route>
@@ -41,8 +44,12 @@ function App() {
           <Route path="/Admin/adminDash" element={<AdminDash />}></Route>
           <Route path="/Admin/createJob" element={<CreateJob />}></Route>
           <Route path="/Admin/candidates" element={<Candidates />}></Route>*/}
-        </Routes>
-  
+      </Routes>
+
+      <Element name="contactUs">
+        <Footer />
+      </Element>
+
     </>
   );
 }

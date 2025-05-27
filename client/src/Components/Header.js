@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { Link as ScrollLink } from 'react-scroll';
 
-const Navbar = () => {
+const Header = () => {
 
     const [isOpen, setOpen] = useState(false);
 
@@ -25,13 +26,26 @@ const Navbar = () => {
                             <nav aria-label="Global">
                                 <ul className="flex items-center gap-6 text-sm">
 
-                                    {["About", "Careers", "History", "Services", "Projects", "Blog"].map((item) => (
-                                        <li key={item}>
-                                            <a className="text-gray-300 transition hover:text-yellow-400 dark:text-white" href="#">
-                                                {item}
-                                            </a>
-                                        </li>
-                                    ))}
+                                    <li class="nav-item">
+                                        <Link to="/" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">HomePage</Link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <Link to="../features" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">Features</Link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <Link to="../about" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">About</Link>
+                                    </li>
+
+                                    <ScrollLink
+                                        to="contactUs"
+                                        smooth={true}
+                                        duration={100}
+                                        offset={-80}
+                                        className="text-gray-300 transition hover:text-yellow-400 dark:text-white cursor-pointer"
+                                    >
+                                        Contact Us
+                                    </ScrollLink>
+
                                 </ul>
                             </nav>
                         </div>
@@ -71,13 +85,26 @@ const Navbar = () => {
                             <nav>
                                 <ul className="flex flex-col gap-4 text-sm">
 
-                                    {["About", "Careers", "History", "Services", "Projects", "Blog"].map((item) => (
-                                        <li key={item}>
-                                            <a className="text-gray-300 transition hover:text-yellow-400 dark:text-white" href="#">
-                                                {item}
-                                            </a>
-                                        </li>
-                                    ))}
+                                    <li class="nav-item">
+                                        <Link to="/" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">HomePage</Link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <Link to="../features" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">Features</Link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <Link to="../about" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">About</Link>
+                                    </li>
+
+                                    <ScrollLink
+                                        to="contactUs"
+                                        smooth={true}
+                                        duration={100}
+                                        offset={-80}
+                                        className="text-gray-300 transition hover:text-yellow-400 dark:text-white cursor-pointer"
+                                    >
+                                        Contact Us
+                                    </ScrollLink>
+
                                 </ul>
                             </nav>
                         </div>
@@ -90,4 +117,4 @@ const Navbar = () => {
     )
 };
 
-export default Navbar;
+export default Header;

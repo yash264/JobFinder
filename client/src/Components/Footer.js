@@ -1,9 +1,7 @@
 import React from "react";
 import { ImLocation, ImEnvelop } from "react-icons/im";
-//import "bootstrap/dist/css/bootstrap.min.css";
-//import "bootstrap/dist/js/bootstrap.min.js";
 
-export const Footer = () => {
+const Footer = () => {
     return (
         <>
             <div class="text-center" style={{color:"white",backgroundColor:"rgba(20, 20, 20, 0.872)"}} >
@@ -23,3 +21,5 @@ export const Footer = () => {
         </>
     )
 };
+
+export default Footer;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FaCode, FaBell, FaLaptop, FaUser, FaEnvelope } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Navbar from '../Components/Navbar';
+import Header from '../Components/Header';
 
 function Home() {
     return (
         <>
             <div className="min-h-screen bg-gray-900 text-white">
-                <Navbar />
+                <Header />
 
                 <header className="relative pt-20 pb-32 flex content-center items-center justify-center min-h-screen">
                     <div className="absolute top-0 w-full h-full bg-center bg-cover opacity-50">
