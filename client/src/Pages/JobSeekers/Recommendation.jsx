@@ -1,19 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+//import moment from "moment";
 import Navbar from "../../Components/Navbar";
-import { Profile } from "../../SvgImage/Profile";
 
-function DashBoard() {
+function Recommendation() {
 
-    const [name, setName] = useState('')
-    const [gender, setGender] = useState('')
-    const [email, setEmail] = useState('')
-    const [mobile, setMobile] = useState('')
-    const [qualification, setQualification] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-
+    const navigate = useNavigate()
+    const [values, setValues] = useState([])
 
     return (
         <>
@@ -23,11 +18,6 @@ function DashBoard() {
                 <section>
                     <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-4 lg:px-8">
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
-                            <div>
-                                <div className="pl-8 w-3/4 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto">
-                                    <Profile />
-                                </div>
-                            </div>
 
                             <div>
                                 <div className="overflow-x-auto rounded border border-gray-300 shadow-sm">
@@ -76,4 +66,4 @@ function DashBoard() {
     )
 }
 
-export default DashBoard;
+export default Recommendation;

@@ -1,12 +1,10 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
 
 export const Profile = () => {
     return (
         <>
             <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="300" height="320" viewBox="0 0 900.31 787" xmlnsXlink="http://www.w3.org/1999/xlink" role="img" artist="Katerina Limpitsouni" source="https://undraw.co/">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900.31 787" xmlnsXlink="http://www.w3.org/1999/xlink" role="img" artist="Katerina Limpitsouni" source="https://undraw.co/">
                     <g id="Group_2" data-name="Group 2" transform="translate(-510.055 -146.5)">
                         <rect id="Rectangle_34" data-name="Rectangle 34" width="52" height="27" transform="translate(1272.055 430.5)" fill="#f2f2f2" opacity="0.998" />
                         <rect id="Rectangle_36" data-name="Rectangle 36" width="52" height="27" transform="translate(1234.055 233.5)" fill="#f2f2f2" opacity="0.998" />

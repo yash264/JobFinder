@@ -1,11 +1,19 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Element } from 'react-scroll';
 
 import Home from "./Pages/Home";
 import Features from "./Pages/Features";
 import About from "./Pages/About";
 import Footer from "./Components/Footer";
+
+import Authentication from "./Pages/JobSeekers/Authentication";
+//import ChatBot from "./Components/ChatBot";
+
+import DashBoard from "./Pages/JobSeekers/DashBoard";
+import Notification from "./Pages/JobSeekers/Notification";
+import Community from "./Pages/JobSeekers/Community";
+import Recommendation from "./Pages/JobSeekers/Recommendation";
 
 /*import Register from "./Pages/Register";
 import Login from "./Pages/Login";
@@ -31,8 +39,14 @@ function App() {
         <Route path="/features" element={<Features />}></Route>
         <Route path="/about" element={<About />}></Route>
 
-        {/*<Route path="/User/register" element={<Register />}></Route>
-          <Route path="/User/login" element={<Login />}></Route>
+        <Route path="/jobSeeker/authentication" element={<Authentication />}></Route>
+
+        <Route path="/jobSeeker/dashBoard" element={<DashBoard />}></Route>
+        <Route path="/jobSeeker/notification" element={<Notification />}></Route>
+        <Route path="/jobSeeker/community" element={<Community />}></Route>
+        <Route path="/jobSeeker/recommendation" element={<Recommendation />}></Route>
+
+        {/*<Route path="/User/login" element={<Login />}></Route>
           <Route path="/User/dashBoard" element={<DashBoard />}></Route>
           <Route path="/User/notification" element={<Notification />}></Route>
           <Route path="/User/applicationWindow" element={<ApplicationWindow />}></Route>
@@ -49,6 +63,8 @@ function App() {
       <Element name="contactUs">
         <Footer />
       </Element>
+
+      {/* <ChatBot /> */}
 
     </>
   );
