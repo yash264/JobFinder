@@ -8,7 +8,7 @@ import About from "./Pages/About";
 import Footer from "./Components/Footer";
 
 import Authentication from "./Pages/JobSeekers/Authentication";
-//import ChatBot from "./Components/ChatBot";
+import ChatBot from "./Components/ChatBot";
 
 import DashBoard from "./Pages/JobSeekers/DashBoard";
 import Notification from "./Pages/JobSeekers/Notification";
@@ -64,7 +64,7 @@ function App() {
         <Footer />
       </Element>
 
-      {/* <ChatBot /> */}
+      <ChatBot />
 
     </>
   );
