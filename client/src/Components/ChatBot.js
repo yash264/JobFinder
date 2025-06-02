@@ -13,10 +13,10 @@ function ChatBot() {
 
     const formatApiResponse = (text) => {
         return text
-            .replace(/\*\*(.*?)\*\*/g, '$1')      // Remove bold markdown (**text** → text)
-            .replace(/^\* /gm, '• ')              // Bullet points: * Item → • Item
-            .replace(/\n\s*\n/g, '\n')            // Remove excess newlines
-            .replace(/^(.*):$/gm, '\n\n$1:\n')    // Section headers on new lines
+            .replace(/\*\*(.*?)\*\*/g, '$1')      
+            .replace(/^\* /gm, '• ')             
+            .replace(/\n\s*\n/g, '\n')            
+            .replace(/^(.*):$/gm, '\n\n$1:\n')    
     };
 
 

@@ -2,7 +2,7 @@ const express = require('express');
 
 const UserRoute = express.Router();
 
-const { register, login, verifyToken, updateUser , fetchUser} = require('../controller/User.controller');
+const { register, login, verifyToken, updateUser , fetchUser} = require('../controller/JobSeeker.controller');
 const authenticateUser = require('../middleware/auth.middleware');
 
 UserRoute.post('/register', register);

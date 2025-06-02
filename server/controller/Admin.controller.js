@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const adminData = require("../schema/AdminData");
 const jwt = require("jsonwebtoken");
-const { registrationMail } = require("../middleware/registrationMail"); 
+const { registrationMail } = require("../SendMail/registrationMail"); 
 
 const adminRegister = async (req, res) => {
     try {

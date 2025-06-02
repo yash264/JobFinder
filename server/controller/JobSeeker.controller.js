@@ -1,28 +1,39 @@
-const mongoose = require("mongoose");
-const personData = require("../schema/UserData");
+const dotenv=require('dotenv')
+const path = require('path');
+
+const JobSeekerData = require("../schema/JobSeekerData");
 const jwt = require("jsonwebtoken");
-const { registrationMail } = require("../middleware/registrationMail"); 
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+ 
+const { registrationMail } = require("../SendMail/registrationMail");
+
 
 const register = async (req, res) => {
     try {
-        const ifExists = await personData.findOne({ email: req.body.email });
+        const ifExists = await JobSeekerData.findOne({ email: req.body.payload.email });
+
         if (ifExists) {
-            res.status(201).json("Email Already Exists");
+            res.status(201).json(
+                {
+                    success: false,
+                    message:"Email Already Exists"
+                }
+            );
         }
         else {
-            const registerPerson = new personData({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password
+            const registerPerson = new JobSeekerData({
+                name: req.body.payload.name,
+                email: req.body.payload.email,
+                password: req.body.payload.password
             })
             const registered = await registerPerson.save();
 
             // to send the mail
-            registrationMail(req.body.name, req.body.email);
+            // registrationMail(req.body.name, req.body.email);
 
             res.status(201).json({
                 success: true,
-                message: "registered"
+                message: "Registered Successfully."
             });
         }
     }
@@ -31,19 +42,25 @@ const register = async (req, res) => {
     }
 }
 
+
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const ifExists = await personData.findOne({ email: email })
+        const { email, password } = req.body.payload;
+        const ifExists = await JobSeekerData.findOne({ email: email })
 
         if (ifExists) {
             if (ifExists.password == password) {
 
                 const token = jwt.sign(
-                    { id:ifExists._id, name:ifExists.name, email:ifExists.email },
-                    'jwt-secret-2k24',
+                    { 
+                        id:ifExists._id,
+                        name:ifExists.name, 
+                        email:ifExists.email 
+                    },
+                    process.env.jwt_secret,
                     { expiresIn: '30d'}
                 );
+
                 res.cookie('token',token,{
                     httpOnly: true,
                     maxAge: 24 * 60 * 60 * 1000
@@ -56,11 +73,17 @@ const login = async (req, res) => {
                 });
             }
             else {
-                res.json({message: "Incorrect Password"});
+                res.json({
+                    success: false,
+                    message: "Incorrect Password"
+                });
             }
         }
         else {
-            res.json({message:"Please Register"});
+            res.json({
+                success: false,
+                message:"Please Register"
+            });
         }
     }
     catch (error) {
@@ -72,7 +95,7 @@ const verifyToken=async(req,res)=>{
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) return res.status(401).json({ valid: false,data:null});
 
-    jwt.verify(token, 'jwt-secret-2k24', (err, decoded) => {
+    jwt.verify(token, process.env.jwt_secret, (err, decoded) => {
         if (err) return res.status(401).json({ valid: false ,data:null});
         return res.json({ valid: true ,data:decoded, message: "ok"});
     });
@@ -80,7 +103,7 @@ const verifyToken=async(req,res)=>{
 
 const fetchUser = async (req, res) => {
     try {
-        const fetchUserData = await personData.findOne({_id:req.user.id});
+        const fetchUserData = await JobSeekerData.findOne({_id:req.user.id});
         
         res.status(201).json({
             success: true,
@@ -95,12 +118,12 @@ const fetchUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const updatedUser = await personData.updateMany({_id:req.user.id},
+        const updatedUser = await JobSeekerData.updateMany({_id:req.user.id},
             {
                 gender:req.body.gender,
             }
         );
-        const personDetail = await personData.updateOne({_id:req.user.id},
+        const personDetail = await JobSeekerData.updateOne({_id:req.user.id},
             {    
                 $set:
                 {

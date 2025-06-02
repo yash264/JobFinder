@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const personSchema = new mongoose.Schema({
+const jobSeekerSchema = new mongoose.Schema({
     name:{
         type:String
     },
@@ -10,26 +10,20 @@ const personSchema = new mongoose.Schema({
     gender:{
         type:String
     },
-    password:{
-        type:String
-    },
     mobile:{
         type:Number
     },
     qualification:{
         type:String
     },
-    city:{
+    homeTown:{
         type:String
     },
-    state:{
+    password:{
         type:String
     },
-    personalDetails:{
-        type:Array
-    }
 })
 
-const personData = new mongoose.model("user",personSchema);
+const jobSeekerData = new mongoose.model("jobSeeker",jobSeekerSchema);
 
-module.exports = personData; 
+module.exports = jobSeekerData; 

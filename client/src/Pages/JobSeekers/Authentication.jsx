@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 import { Auth } from "../../SvgImage/Auth";
+
 
 function Authentication() {
 
@@ -11,7 +14,6 @@ function Authentication() {
         name: '',
         email: '',
         password: '',
-        confirmPassword: '',
     });
 
     const handleChange = (e) => {
@@ -20,11 +22,62 @@ function Authentication() {
             [e.target.id]: e.target.value,
         });
     };
-    
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const url = login
+            ? 'http://localhost:5000/api/login'
+            : 'http://localhost:5000/api/register';
+
+        const payload = login
+            ? { email: formData.email, password: formData.password }
+            : {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+            };
+
+        try {
+            const response = await axios.post(url, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                payload,
+            });
+
+            console.log(response);
+
+            if (response.data.success) {
+                if (!login){
+                    toast.success(response.data.message);
+                    setLogin(true);
+                } 
+                else{
+                    localStorage.setItem("token", response.data.token);
+                    navigate("../jobSeeker/dashBoard");
+                }
+            } 
+            else{
+                if (login){
+                    toast.error(response.data.message);
+                }
+                else {
+                    toast.error(response.data.message);
+                }
+            }
+        }
+        catch (error){
+            console.error(error);
+            toast.error("An error occurred during Authentication.");
+        }
+    };
+
 
     return (
         <div className="mx-auto max-w-screen-xl text-white px-4 py-8 sm:px-6 lg:px-8">
-
+            <ToastContainer />
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
                 <div className="pl-8 w-3/4 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto">
@@ -51,7 +104,7 @@ function Authentication() {
                         </div>
 
                         {login ? (
-                            <form >
+                            <form onSubmit={handleSubmit}>
                                 <div className="mb-4">
                                     <label htmlFor="email" className="block mb-1">
                                         Email
@@ -90,7 +143,7 @@ function Authentication() {
                                 </div>
                             </form>
                         ) : (
-                            <form >
+                            <form onSubmit={handleSubmit}>
                                 <div className="mb-4">
                                     <label htmlFor="name" className="block mb-1">
                                         Name

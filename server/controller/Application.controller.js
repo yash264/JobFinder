@@ -3,7 +3,7 @@ const userData = require("../schema/UserData");
 const adminData = require("../schema/AdminData");
 const jobData = require("../schema/JobData");
 const applicationData = require("../schema/ApplicationData");
-const { congratulationMail } = require("../middleware/congratulationMail");
+const { congratulationMail } = require("../SendMail/congratulationMail");
 
 const fetchNotification = async (req, res) => {
     try {
