@@ -55,7 +55,7 @@ function Authentication() {
                     setLogin(true);
                 } 
                 else{
-                    localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("authToken", response.data.token);
                     navigate("../jobSeeker/dashBoard");
                 }
             } 

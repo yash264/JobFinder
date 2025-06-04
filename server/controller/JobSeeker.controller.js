@@ -103,7 +103,9 @@ const verifyToken=async(req,res)=>{
 
 const fetchUser = async (req, res) => {
     try {
-        const fetchUserData = await JobSeekerData.findOne({_id:req.user.id});
+        const fetchUserData = await JobSeekerData
+            .findOne({ _id:req.user.id })
+            .select("-password");
         
         res.status(201).json({
             success: true,
@@ -121,27 +123,16 @@ const updateUser = async (req, res) => {
         const updatedUser = await JobSeekerData.updateMany({_id:req.user.id},
             {
                 gender:req.body.gender,
+                mobile:req.body.mobile,
+                qualification:req.body.qualification,
+                homeTown:req.body.homeTown,
             }
         );
-        const personDetail = await JobSeekerData.updateOne({_id:req.user.id},
-            {    
-                $set:
-                {
-                    personalDetails:
-                    { 
-                        mobile:req.body.mobile,
-                        qualification:req.body.qualification,
-                        city:req.body.city,
-                        state:req.body.state,
-                    }
-                }
-            }
-        );
+        
         res.status(201).json({
             success: true,
             data: "updated user profile",
             message: updatedUser,
-            value: personDetail,
         });
     }
     catch (error) {
