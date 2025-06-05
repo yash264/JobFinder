@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../../Components/Navbar";
+import Navbar from "../../Components/JobProvider/Navbar";
 import { Profile } from "../../SvgImage/Profile";
-import UpdateSeeker from "../../Components/UpdateSeeker";
+import UpdateProfile from "../../Components/JobSeeker/UpdateProfile";
 
 function DashBoard() {
 
@@ -50,7 +50,7 @@ function DashBoard() {
                             <div>
                                 <div className="overflow-x-auto rounded border border-gray-300 shadow-sm">
 
-                                    <UpdateSeeker />
+                                    <UpdateProfile />
 
                                     <table className="min-w-full divide-y-2 divide-gray-200">
                                         <thead className="ltr:text-left rtl:text-right ">

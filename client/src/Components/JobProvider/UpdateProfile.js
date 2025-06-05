@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 
 
-function UpdateProvider() {
+function UpdateProfile() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -206,4 +206,4 @@ function UpdateProvider() {
     )
 }
 
-export default UpdateProvider;
+export default UpdateProfile;

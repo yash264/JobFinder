@@ -119,6 +119,7 @@ const updateUser = async (req, res) => {
     try {
         const updatedUser = await JobProviderData.updateOne({ _id: req.user.id },
             {
+                fermName: req.body.fermName,
                 mobile: req.body.mobile,
                 about: req.body.about,
                 location: req.body.location,

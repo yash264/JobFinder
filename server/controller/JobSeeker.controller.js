@@ -120,6 +120,7 @@ const updateUser = async (req, res) => {
     try {
         const updatedUser = await JobSeekerData.updateMany({_id:req.user.id},
             {
+                name:req.body.name,
                 gender:req.body.gender,
                 mobile:req.body.mobile,
                 qualification:req.body.qualification,

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 //import moment from "moment";
-import Navbar from "../../Components/Navbar";
+import Navbar from "../../Components/JobProvider/Navbar";
 
 function Notification() {
 
