@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
-const jobData = require("../schema/JobData");
+const jobData = require("../schema/EmploymentData");
 
 const jobCreate = async (req, res) => {
     try {
@@ -8,23 +8,23 @@ const jobCreate = async (req, res) => {
             refId:req.user.id,
             role:req.body.role
         });
+
         if (ifExists) {
             res.status(201).json("role must be unique");
         }
+        
         else{
             const scheduledTime = req.body.lastDate+'T'+req.body.lastTime+'Z';
-            const date = moment(scheduledTime).subtract(330, 'minute').format();
+            const applyTill = moment(scheduledTime).subtract(330, 'minute').format();
 
             const createdJob = new jobData({
-                refId:req.user.id,
-                ferm:req.user.ferm,
-                gmail:req.user.gmail,
-                role:req.body.role,
-                eligibility:req.body.eligibility,
-                skills:req.body.skills,
-                salary:req.body.salary,
-                lastDate:date,
-                aboutUs:req.body.aboutus
+                refId: req.user.id,
+                role: req.body.role,
+                salary: req.body.salary,
+                eligibility: req.body.eligibility,
+                skills: req.body.skills,
+                applyTill: applyTill,
+                about: req.body.about
             })
             const created = await createdJob.save();
     
@@ -39,9 +39,15 @@ const jobCreate = async (req, res) => {
     }
 }
 
+
 const fetchJob = async (req, res) => {
     try {
-        const fetchJobData = await jobData.find({refId:req.user.id});
+        const fetchJobData = await jobData.find(
+            {
+                refId:req.user.id
+            }
+        );
+        
         res.status(201).json({
             success: true,
             message: fetchJobData,
@@ -52,20 +58,4 @@ const fetchJob = async (req, res) => {
     }
 }
 
-const deleteJob = async (req, res) => {
-    try {
-        const deleteJobData = await jobData.deleteOne({
-            refId:req.user.id,
-            role:req.body.role
-        });
-        res.status(201).json({
-            success: true,
-            data: "deleted job",
-        });
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { jobCreate, fetchJob, deleteJob }
+module.exports = { jobCreate, fetchJob }
