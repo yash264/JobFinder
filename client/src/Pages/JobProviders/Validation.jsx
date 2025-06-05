@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-import { Auth } from "../../SvgImage/Auth";
+import { Ferm } from "../../SvgImage/Ferm";
 
 
-function Authentication() {
+function Validation() {
 
     const [login, setLogin] = useState(true);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        name: '',
+        fermName: '',
         email: '',
         password: '',
     });
@@ -28,13 +28,13 @@ function Authentication() {
         e.preventDefault();
 
         const url = login
-            ? 'http://localhost:5000/api/jobSeeker/login'
-            : 'http://localhost:5000/api/jobSeeker/register';
+            ? 'http://localhost:5000/api/jobProvider/login'
+            : 'http://localhost:5000/api/jobProvider/register';
 
         const payload = login
             ? { email: formData.email, password: formData.password }
             : {
-                name: formData.name,
+                fermName: formData.fermName,
                 email: formData.email,
                 password: formData.password,
             };
@@ -81,7 +81,7 @@ function Authentication() {
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
                 <div className="pl-8 w-3/4 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto">
-                    <Auth />
+                    <Ferm />
                 </div>
 
                 <div>
@@ -145,13 +145,13 @@ function Authentication() {
                         ) : (
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-4">
-                                    <label htmlFor="name" className="block mb-1">
-                                        Name
+                                    <label htmlFor="fermName" className="block mb-1">
+                                        Name of the Ferm
                                     </label>
                                     <input
                                         type="text"
-                                        id="name"
-                                        value={formData.name}
+                                        id="fermName"
+                                        value={formData.fermName}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                         required
@@ -205,4 +205,4 @@ function Authentication() {
     )
 }
 
-export default Authentication;
+export default Validation;

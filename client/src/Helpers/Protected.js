@@ -22,7 +22,7 @@ export default function Protected() {
 
         try {
 
-            const response = await axios.post('http://localhost:4502/api/verifyToken', {}, {
+            const response = await axios.post('http://localhost:4502/api/jobSeeker/verifyToken', {}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

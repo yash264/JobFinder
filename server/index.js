@@ -14,7 +14,7 @@ const port = process.env.port;
 
 
 const JobSeeker = require("./routes/JobSeeker.route");
-// const AdminRoute = require("./routes/Admin.route");
+const JobProvider = require("./routes/JobProvider.route");
 // const JobRoute = require("./routes/Job.route");
 // const ApplicationRoute = require("./routes/Application.route");
 
@@ -41,7 +41,7 @@ app.get("/",(req,res)=>{
 
 
 app.use("/api", JobSeeker)
-// app.use("/api", AdminRoute)
+app.use("/api", JobProvider)
 // app.use("/api", JobRoute)
 // app.use("/api", ApplicationRoute)
 

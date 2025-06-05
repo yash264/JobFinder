@@ -4,19 +4,18 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 
 
-function UpdateProfile() {
+function UpdateProvider() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
-        name: "",
+        fermName: "",
         mobile: "",
-        gender: "",
-        qualification: "",
         city: "",
         state: "",
-        homeTown: ""
+        location: "",
+        about: "",
     });
 
     const handleChange = (e) => {
@@ -31,7 +30,7 @@ function UpdateProfile() {
         if (state && city) {
             setFormData((prev) => ({
                 ...prev,
-                homeTown: `${city}, ${state}`,
+                location: `${city}, ${state}`,
             }));
         }
     }, [formData.state, formData.city]);
@@ -42,13 +41,12 @@ function UpdateProfile() {
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/updateUser',
+            const response = await axios.post('http://localhost:5000/api/jobProvider/updateUser',
                 {
-                    name: formData.name,
+                    fermName: formData.fermName,
                     mobile: formData.mobile,
-                    gender: formData.gender,
-                    qualification: formData.qualification,
-                    homeTown: formData.homeTown,
+                    location: formData.location,
+                    about: formData.about,
                 },
                 {
                     headers: {
@@ -57,8 +55,9 @@ function UpdateProfile() {
                     }
                 }
             );
-            if (response.data.data === "updated user profile") {
-                toast.success("Updated User Profile Successfully");
+
+            if (response.data.message === "updated user profile") {
+                toast.success("Updated Profile Successfully");
             }
             else {
                 toast.error("Some Error Occurred");
@@ -107,13 +106,13 @@ function UpdateProfile() {
 
                             <div className="flex flex-wrap -mx-2">
                                 <div className="w-full md:w-1/2 px-2 mb-4">
-                                    <label htmlFor="name" className="block mb-1">
-                                        Name
+                                    <label htmlFor="fermName" className="block mb-1">
+                                        Name of Ferm
                                     </label>
                                     <input
-                                        type="name"
-                                        id="name"
-                                        value={formData.name}
+                                        type="fermName"
+                                        id="fermName"
+                                        value={formData.fermName}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                         required
@@ -134,48 +133,6 @@ function UpdateProfile() {
                                 </div>
                             </div>
 
-
-                            <div className="flex flex-wrap -mx-2">
-                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                    <label htmlFor="gender" className="block mb-1">
-                                        Gender
-                                    </label>
-                                    <select
-                                        id="gender"
-                                        value={formData.gender}
-                                        onChange={handleChange}
-                                        className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                        required
-                                    >
-                                        <option value="">Select Gender</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    </select>
-                                </div>
-
-
-                                <div className="w-full md:w-1/2 px-2 mb-4">
-                                    <label htmlFor="qualification" className="block mb-1">
-                                        Qualification
-                                    </label>
-                                    <select
-                                        id="qualification"
-                                        value={formData.qualification}
-                                        onChange={handleChange}
-                                        className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                        required
-                                    >
-                                        <option selected >Choose...</option>
-                                        <option>High School X</option>
-                                        <option>Inter Mediate XII</option>
-                                        <option>Bachelor's of Technology</option>
-                                        <option>Bachelor's of Science</option>
-                                        <option>Final Year of Graduation</option>
-                                        <option>Other's</option>
-                                    </select>
-                                </div>
-
-                            </div>
 
                             <div className="flex flex-wrap -mx-2">
                                 <div className="w-full md:w-1/2 px-2 mb-4">
@@ -217,6 +174,21 @@ function UpdateProfile() {
                                 </div>
                             </div>
 
+                            <div className="flex flex-wrap -mx-2">
+                                <label htmlFor="fermName" className="block mb-1">
+                                    About
+                                </label>
+                                <textarea
+                                    className="w-full border p-2 rounded mb-3"
+                                    type="text"
+                                    id="about"
+                                    rows={4}
+                                    placeholder="Tell us About your Ferm..."
+                                    value={formData.about}
+                                    onChange={handleChange}
+                                />
+                            </div>
+
                             <button
                                 className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-500"
                                 onClick={handleSubmit}
@@ -234,4 +206,4 @@ function UpdateProfile() {
     )
 }
 
-export default UpdateProfile;
+export default UpdateProvider;

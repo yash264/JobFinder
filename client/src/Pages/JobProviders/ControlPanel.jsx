@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../../Components/Navbar";
 import { Profile } from "../../SvgImage/Profile";
-import UpdateSeeker from "../../Components/UpdateSeeker";
+import UpdateProvider from "../../Components/UpdateProvider";
 
 function DashBoard() {
 
@@ -13,17 +13,17 @@ function DashBoard() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/jobSeeker/fetchUser',
+                const response = await axios.get('http://localhost:5000/api/jobProvider/fetchUser',
                     {
                         headers: {
                             'Content-Type': 'application/json',
-                            Authorization: `Bearer ${localStorage.getItem('token')}`
+                            Authorization: `Bearer ${localStorage.getItem('authToken')}`
                         }
                     }
                 );
 
                 setValues(response.data.value);
-                
+
             }
             catch (error) {
                 console.log(error);
@@ -50,7 +50,7 @@ function DashBoard() {
                             <div>
                                 <div className="overflow-x-auto rounded border border-gray-300 shadow-sm">
 
-                                    <UpdateSeeker />
+                                    <UpdateProvider />
 
                                     <table className="min-w-full divide-y-2 divide-gray-200">
                                         <thead className="ltr:text-left rtl:text-right ">
@@ -59,34 +59,30 @@ function DashBoard() {
 
                                         <tbody className="divide-y divide-gray-200">
                                             <tr className="*:text-gray-900 *:first:font-medium">
-                                                <td className="px-3 py-2 whitespace-nowrap">Name</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{values.name}</td>
-                                            </tr>
-
-                                            <tr className="*:text-gray-900 *:first:font-medium">
-                                                <td className="px-3 py-2 whitespace-nowrap">Gender</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{values.gender}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">Name of the Ferm</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.fermName}</td>
                                             </tr>
 
                                             <tr className="*:text-gray-900 *:first:font-medium">
                                                 <td className="px-3 py-2 whitespace-nowrap">Email Id</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{values.email}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.email}</td>
                                             </tr>
 
                                             <tr className="*:text-gray-900 *:first:font-medium">
                                                 <td className="px-3 py-2 whitespace-nowrap">Mobile Number</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{values.mobile}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.mobile}</td>
                                             </tr>
 
                                             <tr className="*:text-gray-900 *:first:font-medium">
-                                                <td className="px-3 py-2 whitespace-nowrap">Qualification</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{values.qualification}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">Location</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.location}</td>
                                             </tr>
 
                                             <tr className="*:text-gray-900 *:first:font-medium">
-                                                <td className="px-3 py-2 whitespace-nowrap">HomeTown</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{values.homeTown}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">About</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.about}</td>
                                             </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
