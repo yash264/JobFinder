@@ -1,20 +1,26 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
-import moment from "moment";
+import FetchProfile from "../../Components/JobProvider/FetchProfile";
 import Navbar from "../../Components/JobProvider/Navbar";
-import CreateJob from "../../Components/JobProvider/CreateJob";
+import Confirmation from "../../Components/JobProvider/Confirmation";
 
-function Recruitement() {
+function Candidates() {
+
+    const location = useLocation()
+    const role = location.state.role;
+    console.log(role);
 
     const [values, setValues] = useState([]);
-    const [query, setQuery] = useState('');
-    const navigate = useNavigate();
+    const [query, setQuery] = useState("");
 
-    const fetchJobData = async () => {
+    const fetchCandidates = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/fetchJob',
+            const response = await axios.post('http://localhost:5000/api/fetchCandidates',
+                {
+                    role: role,
+                },
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -22,6 +28,7 @@ function Recruitement() {
                     }
                 }
             );
+            console.log(response.data.message);
 
             setValues(response.data.message);
         }
@@ -31,7 +38,7 @@ function Recruitement() {
     }
 
     useEffect(() => {
-        fetchJobData();
+        fetchCandidates();
     }, [])
 
 
@@ -43,18 +50,9 @@ function Recruitement() {
             setValues(filtered);
         }
         else {
-            fetchJobData();
+            fetchCandidates();
         }
     }, [query]);
-
-
-    const showCandidates = (role) => {
-        navigate("../jobProvider/candidates", {
-            state: {
-                role: role
-            }
-        })
-    }
 
 
     return (
@@ -65,9 +63,6 @@ function Recruitement() {
                 <section>
                     <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-4 lg:px-8">
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
-                            <div>
-                                <CreateJob fetchJobData={fetchJobData} />
-                            </div>
 
                             <div>
                                 <input
@@ -83,11 +78,11 @@ function Recruitement() {
                             <table className="min-w-full divide-y-2 divide-gray-200">
                                 <thead className="ltr:text-left rtl:text-right">
                                     <tr className="*:font-medium *:text-gray-900">
-                                        <th className="px-3 py-2 whitespace-nowrap">Role Offered</th>
-                                        <th className="px-3 py-2 whitespace-nowrap">Eligibility</th>
-                                        <th className="px-3 py-2 whitespace-nowrap">Salary in Rupees</th>
-                                        <th className="px-3 py-2 whitespace-nowrap">Last Date to Apply</th>
-                                        <th className="px-3 py-2 whitespace-nowrap">Candidates List</th>
+                                        <th className="px-3 py-2 whitespace-nowrap">Name of Candidate</th>
+                                        <th className="px-3 py-2 whitespace-nowrap">Email Id</th>
+                                        <th className="px-3 py-2 whitespace-nowrap">Document</th>
+                                        <th className="px-3 py-2 whitespace-nowrap">View Profile</th>
+                                        <th className="px-3 py-2 whitespace-nowrap">Accept Application</th>
                                     </tr>
                                 </thead>
 
@@ -95,22 +90,35 @@ function Recruitement() {
                                     {
                                         values === null ? "" : values.map((item) => {
                                             return <tr className="*:text-gray-900 *:first:font-medium">
-                                                <td className="px-3 py-2 whitespace-nowrap">{item.role}</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{item.eligibility}</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{item.salary}</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{moment(item.applyTill).format('Do MMM YY, h:mm a')}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{item.name}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{item.email}</td>
 
                                                 <td className="px-3 py-2 whitespace-nowrap">
-                                                    <button
-                                                        className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
-                                                        onClick={
-                                                            () => showCandidates(
-                                                                item.role
-                                                            )
-                                                        }
+                                                    <a
+                                                        href={item.pdfUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-block text-blue-600 hover:text-blue-800 hover:underline transition duration-200 font-medium"
                                                     >
-                                                        click here
-                                                    </button>
+                                                        {item.document}
+                                                    </a>
+
+                                                </td>
+
+                                                <td className="px-3 py-2 whitespace-nowrap">
+                                                    <FetchProfile
+                                                        role={role}
+                                                        email={item.email}
+                                                    />
+                                                </td>
+
+                                                <td className="px-3 py-2 whitespace-nowrap">
+                                                    <Confirmation
+                                                        role={role}
+                                                        email={item.email}
+                                                        status={item.status}
+                                                        fetchCandidates={fetchCandidates}
+                                                    />
                                                 </td>
                                             </tr>
                                         })
@@ -118,11 +126,11 @@ function Recruitement() {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div >
                 </section >
-            </div>
+            </div >
         </>
     )
 }
 
-export default Recruitement;
+export default Candidates;

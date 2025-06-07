@@ -1,10 +1,12 @@
-const mongoose = require("mongoose");
 const moment = require("moment");
-const jobData = require("../schema/EmploymentData");
+const jobSeekerData = require("../schema/JobSeekerData");
+const employmentData = require("../schema/EmploymentData");
+const applicationData = require("../schema/ApplicationData");
+
 
 const jobCreate = async (req, res) => {
     try {
-        const ifExists = await jobData.findOne({
+        const ifExists = await employmentData.findOne({
             refId:req.user.id,
             role:req.body.role
         });
@@ -17,7 +19,7 @@ const jobCreate = async (req, res) => {
             const scheduledTime = req.body.lastDate+'T'+req.body.lastTime+'Z';
             const applyTill = moment(scheduledTime).subtract(330, 'minute').format();
 
-            const createdJob = new jobData({
+            const createdJob = new employmentData({
                 refId: req.user.id,
                 role: req.body.role,
                 salary: req.body.salary,
@@ -42,7 +44,7 @@ const jobCreate = async (req, res) => {
 
 const fetchJob = async (req, res) => {
     try {
-        const fetchJobData = await jobData.find(
+        const fetchJobData = await employmentData.find(
             {
                 refId:req.user.id
             }
@@ -58,4 +60,138 @@ const fetchJob = async (req, res) => {
     }
 }
 
-module.exports = { jobCreate, fetchJob }
+const fetchCandidates = async (req, res) => {
+    try {
+        const ifExists = await employmentData.findOne(
+            {
+                refId: req.user.id,
+                role: req.body.role,
+            }
+        );
+
+        if (ifExists) {
+            const jobExists = await applicationData.find({
+                jobRefId: ifExists._id,
+            });
+
+            const mergedData = [];
+
+            for (let i = 0; i < jobExists.length; i++) {
+
+                const personExists = await jobSeekerData.findOne({
+                    _id: jobExists[i].refId,
+                });
+
+                mergedData.push({
+                    name: personExists.name,
+                    email: personExists.email,
+
+                    document: jobExists[i].document,
+                    pdfUrl: jobExists[i].pdfUrl,
+                    status: jobExists[i].status,
+                });
+            }
+
+            res.status(201).json({
+                success: true,
+                message: mergedData,
+            });
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+const acceptConfirmation = async (req, res) => {
+    try {
+        const personExists = await jobSeekerData.findOne(
+            {
+                email: req.body.email,
+            }
+        );
+
+        const roleExists = await employmentData.findOne(
+            {
+                refId: req.user.id,
+                role: req.body.role,
+            }
+        );
+
+        if (personExists && roleExists) {
+            const accepted = await applicationData.updateOne(
+                {
+                    refId: personExists._id,
+                    jobRefId: roleExists._id,
+                },
+                {
+                    status: true,
+                }
+            );
+
+            // to send the mail
+            //congratulationMail(req.body.name, req.body.email, req.user.ferm, req.body.role);
+
+            res.status(201).json({
+                success: true,
+                message: "accepted",
+            });
+        }
+
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+const fetchProfile = async (req, res) => {
+    try {
+        const ifExists = await employmentData.findOne(
+            {
+                refId: req.user.id,
+                role: req.body.role
+            }
+        );
+
+        if (ifExists) {
+            const mergedData = [];
+
+            const jobData = await applicationData.findOne(
+                {
+                    jobRefId: ifExists._id,
+                }
+            );
+
+            const profileData = await jobSeekerData.findOne(
+                {
+                    email: req.body.email,
+                }
+            );
+
+            mergedData.push({
+                name: profileData.name,
+                email: profileData.email,
+                gender: profileData.gender,
+                mobile: profileData.mobile,
+                qualification: profileData.qualification,
+                homeTown: profileData.homeTown,
+
+                imageUrl: jobData.imageUrl,
+                yourSelf: jobData.yourSelf,
+            });
+
+            res.status(201).json({
+                success: true,
+                message: mergedData,
+            });
+        }
+
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { jobCreate, fetchJob ,
+    fetchCandidates, acceptConfirmation, fetchProfile,
+}

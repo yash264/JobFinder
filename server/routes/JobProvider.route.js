@@ -1,14 +1,14 @@
 const express = require('express');
 
-const AdminRoute = express.Router();
+const JobProvider = express.Router();
 
 const { register, login, verifyToken, fetchUser, updateUser } = require('../controller/JobProvider.controller');
 const authenticateUser = require('../middleware/auth.middleware');
 
-AdminRoute.post('/jobProvider/register', register);
-AdminRoute.post('/jobProvider/login', login);
-AdminRoute.post('/jobProvider/verifyToken',authenticateUser,verifyToken);
-AdminRoute.get('/jobProvider/fetchUser', authenticateUser, fetchUser);
-AdminRoute.post('/jobProvider/updateUser', authenticateUser, updateUser);
+JobProvider.post('/jobProvider/register', register);
+JobProvider.post('/jobProvider/login', login);
+JobProvider.post('/jobProvider/verifyToken',authenticateUser,verifyToken);
+JobProvider.get('/jobProvider/fetchUser', authenticateUser, fetchUser);
+JobProvider.post('/jobProvider/updateUser', authenticateUser, updateUser);
 
-module.exports = AdminRoute ;
+module.exports = JobProvider ;

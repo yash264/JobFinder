@@ -56,7 +56,7 @@ function Validation() {
                 } 
                 else{
                     localStorage.setItem("authToken", response.data.token);
-                    navigate("../jobSeeker/dashBoard");
+                    navigate("../jobProvider/controlPanel");
                 }
             } 
             else{

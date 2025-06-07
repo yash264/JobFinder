@@ -1,9 +1,8 @@
-const jobSeekerData = require("../schema/JobSeekerData");
 const jobProviderData = require("../schema/JobProviderData");
 const employmentData = require("../schema/EmploymentData");
 const applicationData = require("../schema/ApplicationData");
 
-const { congratulationMail } = require("../SendMail/congratulationMail");
+//const { congratulationMail } = require("../SendMail/congratulationMail");
 
 
 const fetchNotification = async (req, res) => {
@@ -118,25 +117,6 @@ const submitForm = async (req, res) => {
     }
 }
 
-const fetchCandidates = async (req, res) => {
-    try {
-        const ifExists = await applicationData.find(
-            {
-                ferm: req.user.ferm,
-                role: req.body.role,
-            }
-        );
-
-        res.status(201).json({
-            success: true,
-            message: ifExists
-        });
-
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
 
 const fetchPastApplication = async (req, res) => {
     try {
@@ -180,78 +160,7 @@ const fetchPastApplication = async (req, res) => {
     }
 }
 
-const acceptConfirmation = async (req, res) => {
-    try {
-        const ifExists = await applicationData.findOne(
-            {
-                name: req.body.name,
-                email: req.body.email,
-                ferm: req.user.ferm,
-                role: req.body.role,
-            }
-        );
-
-
-
-        if (ifExists) {
-            const accepted = await applicationData.updateOne(
-                {
-                    _id: ifExists._id
-                },
-                {
-                    status: true,
-                }
-            );
-
-            // to send the mail
-            congratulationMail(req.body.name, req.body.email, req.user.ferm, req.body.role);
-
-            res.status(201).json({
-                success: true,
-                message: "accepted",
-            });
-        }
-
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
-
-const fetchProfile = async (req, res) => {
-    try {
-        const ifExists = await applicationData.findOne(
-            {
-                name: req.body.name,
-                email: req.body.email,
-                ferm: req.user.ferm,
-                role: req.body.role,
-            }
-        );
-
-        if (ifExists) {
-            const profileData = await userData.findOne(
-                {
-                    _id: ifExists.refId,
-                    email: ifExists.email,
-                }
-            );
-
-            res.status(201).json({
-                success: true,
-                data: ifExists,
-                message: profileData,
-            });
-        }
-
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
 
 module.exports = {
-    fetchNotification, application, submitForm,
-    fetchCandidates, fetchPastApplication,
-    acceptConfirmation, fetchProfile
+    fetchNotification, application, submitForm, fetchPastApplication,
 }

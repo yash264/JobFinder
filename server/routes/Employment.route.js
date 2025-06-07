@@ -1,11 +1,16 @@
 const express = require('express');
 
-const JobRoute = express.Router();
+const EmploymentRoute = express.Router();
 
-const { jobCreate , fetchJob } = require('../controller/Employment.controller');
+const { jobCreate, fetchJob,
+        fetchCandidates, acceptConfirmation, fetchProfile
+    } = require('../controller/Employment.controller');
 const authenticateUser = require('../middleware/auth.middleware');
 
-JobRoute.post('/jobCreate', authenticateUser, jobCreate);
-JobRoute.get('/fetchJob', authenticateUser, fetchJob);
+EmploymentRoute.post('/jobCreate', authenticateUser, jobCreate);
+EmploymentRoute.get('/fetchJob', authenticateUser, fetchJob);
+EmploymentRoute.post('/fetchCandidates', authenticateUser, fetchCandidates);
+EmploymentRoute.post('/acceptConfirmation', authenticateUser, acceptConfirmation);
+EmploymentRoute.post('/fetchProfile', authenticateUser, fetchProfile);
 
-module.exports = JobRoute ;
+module.exports = EmploymentRoute;

@@ -19,7 +19,7 @@ import Recommendation from "./Pages/JobSeekers/Recommendation";
 
 import ControlPanel from "./Pages/JobProviders/ControlPanel";
 import Recruitement from "./Pages/JobProviders/Recruitement";
-
+import Candidates from "./Pages/JobProviders/Candidates";
 
 /*import Register from "./Pages/Register";
 import Login from "./Pages/Login";
@@ -57,6 +57,7 @@ function App() {
 
         <Route path="/jobProvider/controlPanel" element={<ControlPanel />}></Route>
         <Route path="/jobProvider/recruitement" element={<Recruitement />}></Route>
+        <Route path="/jobProvider/candidates" element={<Candidates />}></Route>
 
         {/*<Route path="/User/login" element={<Login />}></Route>
           <Route path="/User/dashBoard" element={<DashBoard />}></Route>
