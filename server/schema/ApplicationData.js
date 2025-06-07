@@ -4,16 +4,7 @@ const applicationSchema = new mongoose.Schema({
     refId:{
         type:String
     },
-    ferm:{
-        type:String
-    },
-    role:{
-        type:String
-    },
-    name:{
-        type:String
-    },
-    email:{
+    jobRefId:{
         type:String
     },
     imageUrl:{
@@ -25,7 +16,7 @@ const applicationSchema = new mongoose.Schema({
     pdfUrl:{
         type:String
     },
-    yourself:{
+    yourSelf:{
         type:String
     },
     status:{

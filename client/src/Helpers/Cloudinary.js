@@ -1,12 +1,13 @@
 import React from "react";
+import { useState } from "react";
 
-export default function CLoudinary() {
+export default function CLoudinary({ onUpload, acceptedType, label }) {
 
-    const [url, setUrl] = useState("");
     const [uploading, setUploading] = useState(false);
 
-    const cloud_name = 'dcinkczc2';
-    const upload_preset = 'JobFinder';
+    const cloud_name = process.env.REACT_APP_cloud_name;
+    const upload_preset = process.env.REACT_APP_upload_preset;
+
 
     const handleUpload = async (e) => {
         setUploading(true);
@@ -14,7 +15,9 @@ export default function CLoudinary() {
         const file = e.target.files[0];
         if (!file) return;
 
-        const url = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+        const resourceType = file.type === "application/pdf" ? "raw" : "image";
+        const url = `https://api.cloudinary.com/v1_1/${cloud_name}/${resourceType}/upload`;
+
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", upload_preset);
@@ -24,8 +27,9 @@ export default function CLoudinary() {
                 method: "POST",
                 body: formData,
             });
+
             const data = await response.json();
-            setUrl(data.secure_url);
+            onUpload(data.secure_url);
 
         } catch (error) {
             console.error(error);
@@ -37,14 +41,19 @@ export default function CLoudinary() {
 
     return (
         <>
-            <div className="mb-3">
-                <img src={imageUrl} alt="Profile Picture" class="profile-pic" style={{ width: "100px" }} />
+            <div className="w-full px-2 mb-4">
+                <label htmlFor="pdfUrl" className="block mb-1">
+                    {label}
+                </label>
+
                 <input
                     type="file"
-                    className="form-control"
+                    accept={acceptedType}
                     onChange={handleUpload}
-                    disabled={uploading}
+                    className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    required
                 />
+
                 {uploading &&
                     <div className="spinner-border text-primary mt-2" role="status">
                         <span className="visually-hidden">Uploading...</span>

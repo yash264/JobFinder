@@ -13,11 +13,13 @@ import ChatBot from "./Components/ChatBot";
 
 import DashBoard from "./Pages/JobSeekers/DashBoard";
 import Notification from "./Pages/JobSeekers/Notification";
+import ApplicationWindow from "./Pages/JobSeekers/ApplicationWindow";
 import Community from "./Pages/JobSeekers/Community";
 import Recommendation from "./Pages/JobSeekers/Recommendation";
 
 import ControlPanel from "./Pages/JobProviders/ControlPanel";
 import Recruitement from "./Pages/JobProviders/Recruitement";
+
 
 /*import Register from "./Pages/Register";
 import Login from "./Pages/Login";
@@ -48,6 +50,7 @@ function App() {
 
         <Route path="/jobSeeker/dashBoard" element={<DashBoard />}></Route>
         <Route path="/jobSeeker/notification" element={<Notification />}></Route>
+        <Route path="/jobSeeker/applicationWindow" element={<ApplicationWindow />}></Route>
         <Route path="/jobSeeker/community" element={<Community />}></Route>
         <Route path="/jobSeeker/recommendation" element={<Recommendation />}></Route>
 

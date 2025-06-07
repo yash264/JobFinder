@@ -16,7 +16,7 @@ const port = process.env.port;
 const JobSeeker = require("./routes/JobSeeker.route");
 const JobProvider = require("./routes/JobProvider.route");
 const EmploymentRoute = require("./routes/Employment.route");
-// const ApplicationRoute = require("./routes/Application.route");
+const ApplicationRoute = require("./routes/Application.route");
 
 const corsOptions ={
     origin: "http://localhost:3000",
@@ -43,7 +43,7 @@ app.get("/",(req,res)=>{
 app.use("/api", JobSeeker)
 app.use("/api", JobProvider)
 app.use("/api", EmploymentRoute)
-// app.use("/api", ApplicationRoute)
+app.use("/api", ApplicationRoute)
 
 
 app.listen(port , (req , res)=>{

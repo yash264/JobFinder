@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 //import moment from "moment";
-import Navbar from "../../Components/JobProvider/Navbar";
+import Navbar from "../../Components/JobSeeker/Navbar";
 import { FiSend, FiImage } from "react-icons/fi";
 import { FaVideo } from "react-icons/fa";
 

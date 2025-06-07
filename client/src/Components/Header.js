@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Link as ScrollLink } from 'react-scroll';
 
 const Header = () => {

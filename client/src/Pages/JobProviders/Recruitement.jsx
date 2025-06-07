@@ -8,9 +8,10 @@ import CreateJob from "../../Components/JobProvider/CreateJob";
 function Recruitement() {
 
     const [values, setValues] = useState([]);
+    const [query, setQuery] = useState('');
+
 
     const fetchJobData = async () => {
-
         try {
             const response = await axios.get('http://localhost:5000/api/fetchJob',
                 {
@@ -33,6 +34,19 @@ function Recruitement() {
     }, [])
 
 
+    useEffect(() => {
+        if (query.trim() != '') {
+            const filtered = values.filter((job) =>
+                job.role.toLowerCase().startsWith(query.toLowerCase())
+            );
+            setValues(filtered);
+        }
+        else {
+            fetchJobData();
+        }
+    }, [query]);
+
+
     return (
         <>
             <div className="pt-8 sm:pt--6 lg:pt-10">
@@ -50,6 +64,7 @@ function Recruitement() {
                                     type="text"
                                     class="block w-full px-4 py-2 mb-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                     placeholder="Search"
+                                    onChange={(e) => setQuery(e.target.value)}
                                 />
                             </div>
                         </div>

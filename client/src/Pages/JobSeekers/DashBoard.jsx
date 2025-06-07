@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../../Components/JobProvider/Navbar";
+import Navbar from "../../Components/JobSeeker/Navbar";
 import { Profile } from "../../SvgImage/Profile";
 import UpdateProfile from "../../Components/JobSeeker/UpdateProfile";
 
