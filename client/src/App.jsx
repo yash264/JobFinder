@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Element } from 'react-scroll';
 
 import Home from "./Pages/Home";
@@ -14,29 +15,20 @@ import ChatBot from "./Components/ChatBot";
 import DashBoard from "./Pages/JobSeekers/DashBoard";
 import Notification from "./Pages/JobSeekers/Notification";
 import ApplicationWindow from "./Pages/JobSeekers/ApplicationWindow";
-import Community from "./Pages/JobSeekers/Community";
 import Recommendation from "./Pages/JobSeekers/Recommendation";
+
+import CommunitySection from "./Pages/CommunitySection";
 
 import ControlPanel from "./Pages/JobProviders/ControlPanel";
 import Recruitement from "./Pages/JobProviders/Recruitement";
 import Candidates from "./Pages/JobProviders/Candidates";
 
-/*import Register from "./Pages/Register";
-import Login from "./Pages/Login";
-import DashBoard from "./Pages/DashBoard";
-import Notification from "./Pages/Notification";
-import ApplicationWindow from "./Pages/ApplicationWindow";
-import PastApplication from "./Pages/PastApplication";
-import UpgradeSkill from "./Pages/UpgradeSkill";
-
-import AdminReg from "./Pages/Admin/AdminReg";
-import AdminLog from "./Pages/Admin/AdminLog";
-import AdminDash from "./Pages/Admin/AdminDash";
-import CreateJob from "./Pages/Admin/CreateJob";
-import Candidates from "./Pages/Admin/Candidates";*/
-//import "./App.css";
 
 function App() {
+
+  const location = useLocation();
+  const hideGlobalComponents = location.pathname.startsWith("/community");
+
   return (
     <>
 
@@ -51,33 +43,25 @@ function App() {
         <Route path="/jobSeeker/dashBoard" element={<DashBoard />}></Route>
         <Route path="/jobSeeker/notification" element={<Notification />}></Route>
         <Route path="/jobSeeker/applicationWindow" element={<ApplicationWindow />}></Route>
-        <Route path="/jobSeeker/community" element={<Community />}></Route>
         <Route path="/jobSeeker/recommendation" element={<Recommendation />}></Route>
 
+        <Route path="/communitySection" element={<CommunitySection />}></Route>
 
         <Route path="/jobProvider/controlPanel" element={<ControlPanel />}></Route>
         <Route path="/jobProvider/recruitement" element={<Recruitement />}></Route>
         <Route path="/jobProvider/candidates" element={<Candidates />}></Route>
+        <Route path="/jobProvider/recommendation" element={<Recommendation />}></Route>
 
-        {/*<Route path="/User/login" element={<Login />}></Route>
-          <Route path="/User/dashBoard" element={<DashBoard />}></Route>
-          <Route path="/User/notification" element={<Notification />}></Route>
-          <Route path="/User/applicationWindow" element={<ApplicationWindow />}></Route>
-          <Route path="/User/pastApplication" element={<PastApplication />}></Route>
-          <Route path="/User/upgradeSkill" element={<UpgradeSkill />}></Route>
-
-          <Route path="/Admin/adminreg" element={<AdminReg />}></Route>
-          <Route path="/Admin/adminLog" element={<AdminLog />}></Route>
-          <Route path="/Admin/adminDash" element={<AdminDash />}></Route>
-          <Route path="/Admin/createJob" element={<CreateJob />}></Route>
-          <Route path="/Admin/candidates" element={<Candidates />}></Route>*/}
       </Routes>
 
-      <Element name="contactUs">
-        <Footer />
-      </Element>
-
-      <ChatBot />
+      {!hideGlobalComponents && (
+        <>
+          <Element name="contactUs">
+            <Footer />
+          </Element>
+          <ChatBot />
+        </>
+      )}
 
     </>
   );

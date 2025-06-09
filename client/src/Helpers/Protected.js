@@ -27,8 +27,7 @@ export default function Protected() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
-            
+      
             return { isValid: response.data.valid, data: response.data.data };
         } catch (error) {
             console.error(error);

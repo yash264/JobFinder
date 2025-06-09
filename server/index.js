@@ -1,13 +1,15 @@
 //backend
-const express = require("express")
-const app = express()
+const express = require("express");
+const app = express();
+const http = require("http");
 const cors = require("cors");
 const hbs = require("hbs");  
 const path = require("path");
 const dotenv=require('dotenv');
-require("./connection");
-const cookieParser = require("cookie-parser")
+const cookieParser = require("cookie-parser");
 
+const initSocket = require("./socket");
+require("./connection");
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const port = process.env.port;
@@ -46,6 +48,10 @@ app.use("/api", EmploymentRoute)
 app.use("/api", ApplicationRoute)
 
 
-app.listen(port , (req , res)=>{
+const server = http.createServer(app);
+initSocket(server);
+
+
+server.listen(port, () => {
     console.log( `Server is running at ${port}`)
 }) 

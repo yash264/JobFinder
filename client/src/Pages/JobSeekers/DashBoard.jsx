@@ -21,6 +21,7 @@ function DashBoard() {
                         }
                     }
                 );
+                console.log(response.data.value);
 
                 setValues(response.data.value);
                 
