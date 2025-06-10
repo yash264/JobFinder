@@ -2,23 +2,26 @@
 from flask import Flask, request, jsonify, render_template
 import joblib
 import numpy as np
-from suggestions import recommend_suggestion
 from flask_cors import CORS
+
+from suggestions.jobSeekers import recommend_jobSeeker_suggestion
+from suggestions.jobProviders import recommend_jobProvider_suggestion
+
 
 app = Flask(__name__)
 
 
 # set the cors value
-# cors_options = {
-#     "origins": "https://vidyavaani-meta.vercel.app",
-#     "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"],
-#     "allow_headers": ["Content-Type", "Authorization"],
-#     "supports_credentials": True
-# }
+cors_options = {
+    "origins": "http://localhost:3000",
+    "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"],
+    "allow_headers": ["Content-Type", "Authorization"],
+    "supports_credentials": True
+}
 
 
-# # Apply CORS to the app with specific options
-# CORS(app, resources={r"/*": cors_options})
+# Apply CORS to the app with specific options
+CORS(app, resources={r"/*": cors_options})
 
 
 # Load trained ML model
@@ -32,7 +35,7 @@ def home():
 
 
 # Classify student performance
-def classify_student(score):
+def classify_person(score):
     if score >= 75:
         return "good"
     elif score >= 45:
@@ -42,37 +45,82 @@ def classify_student(score):
 
 
 # route to predicting the score
-@app.route("/predict", methods=["POST"])
-def predict():
+@app.route("/predict/jobSeekers", methods=["POST"])
+def jobSeekers():
     try:
         data = request.get_json()
         print(data)
         
-        study_hours = float(data["study_hours"])
-        sleep_hours = float(data["sleep_hours"])
-        revision_frequency = int(data["revision_frequency"])
-        exam_stress_level = int(data["exam_stress_level"])
-        preperation_level = int(data["preperation_level"])
+        techincal_skill = int(data["techincal_skill"])
+        communication_skill = int(data["communication_skill"])
+        problem_solving = int(data["problem_solving"])
+        creativity = int(data["creativity"])
+        leadership = int(data["leadership"])
 
         # Predict performance category
-        prediction = model.predict(
+        prediction = jobSeekersModel.predict(
             np.array([
                 [   
-                    study_hours,
-                    sleep_hours,
-                    revision_frequency,
-                    exam_stress_level,
-                    preperation_level
+                    techincal_skill,
+                    communication_skill,
+                    problem_solving,
+                    creativity,
+                    leadership 
                 ]
                 ])
             )[0]
         
         # classify the category of student
         final_score = max(10, min(100, prediction))
-        category = classify_student(final_score)
+        category = classify_person(final_score)
 
         # Get recommendation
-        recommendation = recommend_suggestion(category)
+        recommendation = recommend_jobSeeker_suggestion(category)
+
+        return jsonify(
+            {
+                "performance_scores": float(prediction),
+                "recommendation": recommendation
+            }
+        )
+    
+    except Exception as error:
+        return jsonify({"error": str(error)})
+
+
+
+# route to predicting the score
+@app.route("/predict/jobProviders", methods=["POST"])
+def jobProviders():
+    try:
+        data = request.get_json()
+        print(data)
+        
+        domain_expertise = int(data["domain_expertise"])
+        communication_skill = int(data["communication_skill"])
+        collaboration = int(data["collaboration"])
+        time_management = int(data["time_management"])
+        cultural_fit = int(data["cultural_fit"])
+
+        # Predict performance category
+        prediction = jobProvidersModel.predict(
+            np.array([
+                [   
+                    domain_expertise,
+                    communication_skill,
+                    collaboration,
+                    time_management,
+                    cultural_fit 
+                ]
+                ])
+            )[0]
+        
+        # classify the category of student
+        final_score = max(10, min(100, prediction))
+        category = classify_person(final_score)
+
+        # Get recommendation
+        recommendation = recommend_jobProvider_suggestion(category)
 
         return jsonify(
             {

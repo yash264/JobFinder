@@ -70,8 +70,8 @@ performance_DB = {
     ],
 }
 
-def recommend_suggestion(student_type):
-    suggestions = performance_DB.get(student_type.lower())
+def recommend_jobSeeker_suggestion(person_type):
+    suggestions = performance_DB.get(person_type.lower())
     if suggestions:
         return random.sample(suggestions, 1)  # Recommend 1 random suggestions
     return []

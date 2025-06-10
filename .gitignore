@@ -4,6 +4,7 @@
 /client/node_modules
 /server/node_modules
 /flaskServer/env
+/flaskServer/__pycache__
 
 
 # env

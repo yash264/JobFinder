@@ -6,17 +6,17 @@ import SelectButton from "../../Components/SelectButton";
 import { ToastContainer, toast } from 'react-toastify';
 import Analysis from "../../Components/Analysis";
 
-function Recommendation() {
+function EnhanceSkill() {
 
     const [score, setScore] = useState([])
     const [values, setValues] = useState([])
 
     const [formData, setFormData] = useState({
-        techincal_skill: '',
+        domain_expertise: '',
         communication_skill: '',
-        problem_solving: '',
-        creativity: '',
-        leadership: '',
+        collaboration: '',
+        time_management: '',
+        cultural_fit: '',
     });
 
     const handleChange = (e) => {
@@ -30,13 +30,13 @@ function Recommendation() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:5000/predict/jobSeekers',
+            const response = await axios.post('http://127.0.0.1:5000/predict/jobProviders',
                 {
-                    techincal_skill: formData.techincal_skill,
+                    domain_expertise: formData.domain_expertise,
                     communication_skill: formData.communication_skill,
-                    problem_solving: formData.problem_solving,
-                    creativity: formData.creativity,
-                    leadership: formData.leadership,
+                    collaboration: formData.collaboration,
+                    time_management: formData.time_management,
+                    cultural_fit: formData.cultural_fit,
                 },
             );
             console.log(response.data);
@@ -68,10 +68,10 @@ function Recommendation() {
                                     </h3>
 
                                     <SelectButton
-                                        label="Technical Skill"
-                                        id="techincal_skill"
+                                        label="Domain Expertise"
+                                        id="domain_expertise"
                                         handleChange={handleChange}
-                                        value={formData.techincal_skill}
+                                        value={formData.domain_expertise}
                                     />
 
                                     <SelectButton
@@ -82,24 +82,24 @@ function Recommendation() {
                                     />
 
                                     <SelectButton
-                                        label="Problem Solving"
-                                        id="problem_solving"
+                                        label="Collaboration in WorkSpace"
+                                        id="collaboration"
                                         handleChange={handleChange}
-                                        value={formData.problem_solving}
+                                        value={formData.collaboration}
                                     />
 
                                     <SelectButton
-                                        label="Creativity"
-                                        id="creativity"
+                                        label="Time Management"
+                                        id="time_management"
                                         handleChange={handleChange}
-                                        value={formData.creativity}
+                                        value={formData.time_management}
                                     />
 
                                     <SelectButton
-                                        label="LeaderShip"
-                                        id="leadership"
+                                        label="Cultural Fit"
+                                        id="cultural_fit"
                                         handleChange={handleChange}
-                                        value={formData.leadership}
+                                        value={formData.cultural_fit}
                                     />
 
                                     <button
@@ -131,4 +131,4 @@ function Recommendation() {
     )
 }
 
-export default Recommendation;
+export default EnhanceSkill;
