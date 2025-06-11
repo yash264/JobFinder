@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import { Auth } from "../../SvgImage/Auth";
+import Protected from "../../Helpers/Protected";
 
 
 function Authentication() {
 
     const [login, setLogin] = useState(true);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -26,6 +28,7 @@ function Authentication() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         const url = login
             ? 'http://localhost:5000/api/jobSeeker/login'
@@ -47,20 +50,19 @@ function Authentication() {
                 payload,
             });
 
-            console.log(response);
-
             if (response.data.success) {
-                if (!login){
+                if (!login) {
                     toast.success(response.data.message);
                     setLogin(true);
-                } 
-                else{
+                }
+                else {
+                    localStorage.setItem("userType", "jobSeeker");
                     localStorage.setItem("authToken", response.data.token);
                     navigate("../jobSeeker/dashBoard");
                 }
-            } 
-            else{
-                if (login){
+            }
+            else {
+                if (login) {
                     toast.error(response.data.message);
                 }
                 else {
@@ -68,16 +70,19 @@ function Authentication() {
                 }
             }
         }
-        catch (error){
+        catch (error) {
             console.error(error);
             toast.error("An Error occurred during Authentication.");
         }
+
+        setLoading(false);
     };
 
 
     return (
         <div className="mx-auto max-w-screen-xl text-white px-4 py-8 sm:px-6 lg:px-8">
             <ToastContainer />
+            <Protected />
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
                 <div className="pl-8 w-3/4 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto">
@@ -133,12 +138,18 @@ function Authentication() {
                                     />
                                 </div>
 
+                                {loading && (
+                                    <div className="flex justify-center items-center my-4">
+                                        <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+                                    </div>
+                                )}
+
                                 <div className="flex justify-center">
                                     <button
                                         type="submit"
                                         className="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded font-semibold"
                                     >
-                                        Sign in
+                                        Login
                                     </button>
                                 </div>
                             </form>
@@ -157,7 +168,6 @@ function Authentication() {
                                         required
                                     />
                                 </div>
-
 
                                 <div className="mb-4">
                                     <label htmlFor="email" className="block mb-1">
@@ -187,6 +197,11 @@ function Authentication() {
                                     />
                                 </div>
 
+                                {loading && (
+                                    <div className="flex justify-center items-center my-4">
+                                        <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+                                    </div>
+                                )}
 
                                 <div className="flex justify-center">
                                     <button

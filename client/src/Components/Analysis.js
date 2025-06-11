@@ -4,8 +4,16 @@ export default function Analysis({ score, values }) {
 
     if (!score || score.performance_scores == null) {
         return (
-            <div className="text-center text-gray-500 text-lg font-medium p-4">
-                No analysis available
+            <div className="bg-white rounded-lg shadow-md p-6 text-gray-700 max-w-3xl mx-auto m-4">
+                <h2 className="text-2xl text-center font-bold text-gray-800 mb-2">
+                    AI-Powered Insights
+                </h2>
+                <p className="text-sm p-2 leading-relaxed text-gray-600">
+                    Our machine learning engine evaluates your core skills — from technical ability to leadership — and calculates a job readiness score that reflects your real-world potential.
+                </p>
+                <p className="text-sm p-2 leading-relaxed text-gray-600">
+                    It doesn’t stop there. You'll get targeted recommendations to improve, grow, and stand out in today’s job market.
+                </p>
             </div>
         );
     }

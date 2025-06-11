@@ -29,7 +29,7 @@ function ApplicationWindow() {
                     }
                 }
             );
-            console.log(response.data.message);
+            
             setValues(response.data.message[0]);
         }
         catch (error) {
@@ -121,7 +121,9 @@ function ApplicationWindow() {
                         </div>
 
                         <div className="md:col-span-1 w-full pt-6">
-                            <ApplicationForm values={values} />
+                            <ApplicationForm
+                                values={values}
+                            />
                         </div>
 
                     </div>

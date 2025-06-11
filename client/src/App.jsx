@@ -27,7 +27,9 @@ import EnhanceSkill from "./Pages/JobProviders/EnhanceSkill";
 function App() {
 
   const location = useLocation();
-  const hideGlobalComponents = location.pathname.startsWith("/community");
+  const hideGlobalComponents =
+    location.pathname.startsWith("/jobSeeker/communitySection") ||
+    location.pathname.startsWith("/jobProvider/communitySection");
 
   return (
     <>
@@ -43,13 +45,13 @@ function App() {
         <Route path="/jobSeeker/dashBoard" element={<DashBoard />}></Route>
         <Route path="/jobSeeker/notification" element={<Notification />}></Route>
         <Route path="/jobSeeker/applicationWindow" element={<ApplicationWindow />}></Route>
+        <Route path="/jobSeeker/communitySection" element={<CommunitySection />}></Route>
         <Route path="/jobSeeker/recommendation" element={<Recommendation />}></Route>
-
-        <Route path="/communitySection" element={<CommunitySection />}></Route>
 
         <Route path="/jobProvider/controlPanel" element={<ControlPanel />}></Route>
         <Route path="/jobProvider/recruitement" element={<Recruitement />}></Route>
         <Route path="/jobProvider/candidates" element={<Candidates />}></Route>
+        <Route path="/jobProvider/communitySection" element={<CommunitySection />}></Route>
         <Route path="/jobProvider/recommendation" element={<EnhanceSkill />}></Route>
 
       </Routes>

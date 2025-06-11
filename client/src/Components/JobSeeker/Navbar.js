@@ -1,11 +1,19 @@
-import React from "react";
+import React, { use } from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Link as ScrollLink } from 'react-scroll';
 
 const Navbar = () => {
 
     const [isOpen, setOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const logout = (e) => {
+        e.preventDefault();
+
+        localStorage.removeItem("userType");
+        localStorage.removeItem("authToken");
+        navigate("/");
+    }
 
     return (
         <>
@@ -18,8 +26,11 @@ const Navbar = () => {
                                 <span className="sr-only">Home</span>
                             </a>
 
-                            <img className="h-16 bg-white rounded" src="https://media.licdn.com/dms/image/v2/D4E12AQGsyXeSqLadEw/article-cover_image-shrink_720_1280/B4EZVIFnWRGgAM-/0/1740671186886?e=2147483647&v=beta&t=Mphlll-JGtzPBgBXJrlL7u6r6zw_im2JfkVBaIo0H0s" title="task icons" />
-
+                            <img
+                                className="h-16 bg-white rounded"
+                                src="https://media.licdn.com/dms/image/v2/D4E12AQGsyXeSqLadEw/article-cover_image-shrink_720_1280/B4EZVIFnWRGgAM-/0/1740671186886?e=2147483647&v=beta&t=Mphlll-JGtzPBgBXJrlL7u6r6zw_im2JfkVBaIo0H0s"
+                                title="task icons"
+                            />
                         </div>
 
                         <div className="hidden md:block">
@@ -33,7 +44,7 @@ const Navbar = () => {
                                         <Link to="../jobSeeker/notification" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">Live Notification</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <Link to="../jobSeeker/community" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">Community Section</Link>
+                                        <Link to="../jobSeeker/communitySection" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">Community Section</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link to="../jobSeeker/recommendation" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">AI Recommendation</Link>
@@ -45,12 +56,13 @@ const Navbar = () => {
 
                         <div className="flex items-center gap-4">
                             <div className="sm:flex sm:gap-4">
-                                <a
-                                    className="rounded-md bg-rose-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-teal-500"
-                                    href="#"
+                                <button
+                                    type="button"
+                                    className="rounded-md bg-rose-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-rose-700"
+                                    onClick={logout}
                                 >
-                                    Login
-                                </a>
+                                    Logout
+                                </button>
                             </div>
 
                             <div className="block md:hidden">
@@ -78,14 +90,14 @@ const Navbar = () => {
                             <nav>
                                 <ul className="flex flex-col gap-4 text-sm">
 
-                                <li class="nav-item">
+                                    <li class="nav-item">
                                         <Link to="../jobSeeker/dashBoard" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">DashBoard</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link to="../jobSeeker/notification" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">Live Notification</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <Link to="../jobSeeker/community" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">Community Section</Link>
+                                        <Link to="../jobSeeker/communitySection" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">Community Section</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link to="../jobSeeker/recommendation" className="text-gray-300 transition hover:text-yellow-400 dark:text-white">AI Recommendation</Link>

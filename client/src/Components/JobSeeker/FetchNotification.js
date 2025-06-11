@@ -6,10 +6,11 @@ import moment from "moment";
 import { ToastContainer, toast } from 'react-toastify';
 
 
-export default function FetchNotification({ notification, values }) {
+export default function FetchNotification({ notification, values, setValues, query, fetchNotification }) {
 
     const navigate = useNavigate()
     const [pastValues, setPastValues] = useState([])
+
 
     const showApplication = (applyTill, email, role) => {
         const scheduled = moment(applyTill).format('Do MMM YYYY, h:mm:ss a');
@@ -41,7 +42,7 @@ export default function FetchNotification({ notification, values }) {
                     }
                 }
             );
-            console.log(response.data.message);
+            
             setPastValues(response.data.message);
         }
         catch (error) {
@@ -50,8 +51,43 @@ export default function FetchNotification({ notification, values }) {
     }
 
     useEffect(() => {
-        showPastApplication();
+        if (notification) {
+            fetchNotification();
+        }
+        else {
+            showPastApplication();
+        }
     }, [notification]);
+
+
+    useEffect(() => {
+        if (query.trim() != '') {
+            if (notification) {
+                const filtered = values.filter((job) =>
+                    job.role.toLowerCase().startsWith(query.toLowerCase()) ||
+                    job.fermName.toLowerCase().startsWith(query.toLowerCase())
+                );
+
+                setValues(filtered);
+            }
+            else if (!notification) {
+                const filtered = pastValues.filter((job) =>
+                    job.role.toLowerCase().startsWith(query.toLowerCase()) ||
+                    job.fermName.toLowerCase().startsWith(query.toLowerCase())
+                );
+
+                setPastValues(filtered);
+            }
+        }
+        else {
+            if (notification) {
+                fetchNotification();
+            }
+            else {
+                showPastApplication();
+            }
+        }
+    }, [query]);
 
 
     return (
@@ -81,7 +117,7 @@ export default function FetchNotification({ notification, values }) {
 
                                             <td className="px-3 py-2 whitespace-nowrap">
                                                 <button
-                                                    className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                                                    className="rounded bg-blue-600 p-2 text-white transition hover:bg-blue-700"
                                                     onClick={
                                                         () => showApplication(
                                                             item.applyTill,
@@ -162,7 +198,7 @@ export default function FetchNotification({ notification, values }) {
                         </table>
                     )}
 
-                    <ToastContainer />
+                <ToastContainer />
             </div>
         </>
     )

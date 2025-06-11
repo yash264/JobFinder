@@ -5,31 +5,39 @@ import Navbar from "../../Components/JobSeeker/Navbar";
 import { Profile } from "../../SvgImage/Profile";
 import UpdateProfile from "../../Components/JobSeeker/UpdateProfile";
 
+
 function DashBoard() {
-
     const [values, setValues] = useState([])
+    const userType = localStorage.getItem('userType');
 
+    const fetchUserData = async () => {
+
+        let endpoint = '';
+        let token = '';
+
+        if (userType === 'jobSeeker') {
+            endpoint = 'http://localhost:5000/api/jobSeeker/fetchUser';
+            token = localStorage.getItem('authToken');
+        }
+
+        try {
+            const response = await axios.get(endpoint,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            setValues(response.data.value);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/jobSeeker/fetchUser',
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${localStorage.getItem('token')}`
-                        }
-                    }
-                );
-                console.log(response.data.value);
-
-                setValues(response.data.value);
-                
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
         fetchUserData();
     }, [])
 
@@ -51,7 +59,9 @@ function DashBoard() {
                             <div>
                                 <div className="overflow-x-auto rounded border border-gray-300 shadow-sm">
 
-                                    <UpdateProfile />
+                                    <UpdateProfile
+                                        fetchUserData={fetchUserData}
+                                    />
 
                                     <table className="min-w-full divide-y-2 divide-gray-200">
                                         <thead className="ltr:text-left rtl:text-right ">

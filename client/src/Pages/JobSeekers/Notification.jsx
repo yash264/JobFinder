@@ -1,15 +1,17 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Navbar from "../../Components/JobSeeker/Navbar";
 import FetchNotification from "../../Components/JobSeeker/FetchNotification";
 
-function Notification() {
 
+function Notification() {
     const [values, setValues] = useState([])
+    const [query, setQuery] = useState('');
     const [notification, setNotification] = useState(true);
 
-    const handleSubmit = async () => {
+
+    const fetchNotification = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/fetchNotification',
                 {
@@ -19,17 +21,13 @@ function Notification() {
                     }
                 }
             );
-            console.log(response.data.message);
+            
             setValues(response.data.message);
         }
         catch (error) {
             console.log(error);
         }
     }
-
-    useEffect(() => {
-        handleSubmit();
-    }, [notification]);
 
 
     return (
@@ -44,14 +42,19 @@ function Notification() {
                                 <div className="flex justify-between mb-2">
                                     <button
                                         onClick={() => setNotification(true)}
-                                        className={`flex-1 py-2 text-center text-white font-semibold rounded-l-lg ${notification ? 'bg-indigo-600' : 'bg-gray-700 hover:bg-gray-600'
+                                        className={`flex-1 py-2 text-center text-white font-semibold rounded-l-lg 
+                                            ${notification ? 'bg-indigo-500' :
+                                                'bg-gray-500 hover:bg-gray-600'
                                             }`}
                                     >
                                         Live Notification
                                     </button>
+
                                     <button
                                         onClick={() => setNotification(false)}
-                                        className={`flex-1 py-2 text-center text-white font-semibold rounded-r-lg ${!notification ? 'bg-indigo-600' : 'bg-gray-700 hover:bg-gray-600'
+                                        className={`flex-1 py-2 text-center text-white font-semibold rounded-r-lg 
+                                            ${!notification ? 'bg-indigo-600' :
+                                                'bg-gray-500 hover:bg-gray-600'
                                             }`}
                                     >
                                         Past Application
@@ -64,6 +67,7 @@ function Notification() {
                                     type="text"
                                     class="block w-full px-4 py-2 mb-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                                     placeholder="Search"
+                                    onChange={(e) => setQuery(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -71,6 +75,9 @@ function Notification() {
                         <FetchNotification
                             notification={notification}
                             values={values}
+                            setValues={setValues}
+                            query={query}
+                            fetchNotification={fetchNotification}
                         />
                     </div>
                 </section >

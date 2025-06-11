@@ -55,16 +55,16 @@ function ChatBot() {
     return (
         <>
             <button
-                className="fixed bottom-5 right-5 z-50 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-500"
+                className="fixed bottom-5 right-5 z-50 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700"
                 onClick={() => setIsOpen(true)}
             >
-                Ask Gemini
+                Need Help
             </button>
 
 
             {isOpen && (
                 <div className="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center px-4">
-                    <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto relative mt-20 p-6">
+                    <div className="bg-white text-center rounded-lg shadow-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto relative mt-20 p-6">
 
                         <button
                             className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
@@ -73,7 +73,7 @@ function ChatBot() {
                             ✖
                         </button>
 
-                        <h2 className="text-2xl font-semibold mb-4">Ask Gemini</h2>
+                        <h2 className="text-xl font-semibold mb-4">Need Help from our AI Assistant.</h2>
 
 
                         {response && !loading && (
@@ -108,9 +108,9 @@ function ChatBot() {
                         <button
                             onClick={handleSubmit}
                             disabled={loading || !query.trim()}
-                            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500"
+                            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                         >
-                            {loading ? "Generating..." : "Generate Response"}
+                            {loading ? "Generating..." : "Search"}
                         </button>
 
                     </div>

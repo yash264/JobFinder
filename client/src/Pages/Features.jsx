@@ -10,7 +10,7 @@ function Features() {
                 <Header />
 
                 <header className="relative pt-20 pb-32 flex content-center items-center justify-center min-h-screen">
-                    <div className="bg-gray-900 text-white px-6 py-12">
+                    <div className="bg-gray-800 text-white px-6 py-12">
 
                         <h4 className="text-2xl text-center font-bold mb-4">
                             FEATURES
@@ -25,7 +25,7 @@ function Features() {
                             </ul>
                         </div>
 
-                        <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                        <div className="p-4 max-w-6xl bg-gray-700 mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                             <div>
                                 <h5 className="text-xl font-semibold mb-4 text-center md:text-left">ADMIN</h5>
                                 <ul className="space-y-2 text-base">
