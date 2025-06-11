@@ -18,7 +18,11 @@ const Header = () => {
                                 <span className="sr-only">Home</span>
                             </a>
 
-                            <img className="h-16 bg-white rounded" src="https://media.licdn.com/dms/image/v2/D4E12AQGsyXeSqLadEw/article-cover_image-shrink_720_1280/B4EZVIFnWRGgAM-/0/1740671186886?e=2147483647&v=beta&t=Mphlll-JGtzPBgBXJrlL7u6r6zw_im2JfkVBaIo0H0s" title="task icons" />
+                            <img
+                                className="h-16 bg-white rounded"
+                                src="https://media.licdn.com/dms/image/v2/D4E12AQGsyXeSqLadEw/article-cover_image-shrink_720_1280/B4EZVIFnWRGgAM-/0/1740671186886?e=2147483647&v=beta&t=Mphlll-JGtzPBgBXJrlL7u6r6zw_im2JfkVBaIo0H0s"
+                                title="task icons"
+                            />
 
                         </div>
 
@@ -52,12 +56,12 @@ const Header = () => {
 
                         <div className="flex items-center gap-4">
                             <div className="sm:flex sm:gap-4">
-                                <a
+                                <Link
+                                    to="../jobProvider/validation"
                                     className="rounded-md bg-rose-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-teal-500"
-                                    href="#"
                                 >
-                                    Login
-                                </a>
+                                    Admin Corner
+                                </Link>
                             </div>
 
                             <div className="block md:hidden">
