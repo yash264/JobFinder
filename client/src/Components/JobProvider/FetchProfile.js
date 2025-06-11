@@ -1,10 +1,9 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 
 function FetchProfile({ role, email }) {
-
     const [values, setValues] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -25,8 +24,8 @@ function FetchProfile({ role, email }) {
                     }
                 }
             );
-            setValues(response.data.message[0]);
 
+            setValues(response.data.message[0]);
         }
         catch (error) {
             console.log(error);
@@ -37,15 +36,15 @@ function FetchProfile({ role, email }) {
     return (
         <>
             <button
-                className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-500"
+                className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
                 onClick={() => fetchProfile()}
             >
-                Update Profile
+                click here
             </button>
 
             {isOpen && (
                 <div className="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center px-4">
-                    <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto relative mt-20 p-6">
+                    <div className="bg-white text-center rounded-lg shadow-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto relative mt-20 p-6">
 
                         <button
                             className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
@@ -54,23 +53,30 @@ function FetchProfile({ role, email }) {
                             ✖
                         </button>
 
-                        <h2 className="text-2xl font-semibold mb-4">Update Your Profile</h2>
+                        <h2 className="text-2xl font-semibold mb-1">
+                            Candidate Profile
+                        </h2>
 
+                        <hr className="border-t-2 border-gray-300" />
 
-                        <div className="flex justify-center m-1">
-                            <img
-                                src={values.imageUrl}
-                                alt="Profile Picture"
-                                className="w-24 h-24 rounded object-cover border-2 border-indigo-500 shadow-md"
-                            />
+                        <div className="max-w-xl mx-auto bg-white rounded-lg shadow-lg p-4 mb-4 flex items-center justify-between gap-6">
+                            <div className="text-left flex-1">
+                                <h2 className="text-lg font-semibold text-gray-900">Name of Candidate</h2>
+                                <p className="text-base text-gray-700">{values.name}</p>
+                            </div>
+
+                            <div>
+                                <img
+                                    src={values.imageUrl}
+                                    alt="Profile Picture"
+                                    className="w-24 h-24 rounded object-cover border-2 border-indigo-500 shadow-md"
+                                />
+                            </div>
                         </div>
+                        
 
-                        <table className="min-w-full divide-y-2 divide-gray-200">
+                        <table className="min-w-full divide-gray-200">
                             <thead className="ltr:text-left rtl:text-right">
-                                <tr className="*:font-medium *:text-gray-900">
-                                    <th className="px-3 py-2 whitespace-nowrap">Name of Candidate</th>
-                                    <th className="px-3 py-2 whitespace-nowrap">{values.name}</th>
-                                </tr>
                             </thead>
 
                             <tbody className="divide-y divide-gray-200">

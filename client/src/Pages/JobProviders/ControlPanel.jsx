@@ -5,30 +5,38 @@ import Navbar from "../../Components/JobProvider/Navbar";
 import { Profile } from "../../SvgImage/Profile";
 import UpdateProfile from "../../Components/JobProvider/UpdateProfile";
 
+
 function DashBoard() {
-
     const [values, setValues] = useState([])
+    const userType = localStorage.getItem('userType');
 
+    const fetchUserData = async () => {
+        let endpoint = '';
+        let token = '';
+
+        if (userType === 'jobProvider') {
+            endpoint = 'http://localhost:5000/api/jobProvider/fetchUser';
+            token = localStorage.getItem('authToken');
+        }
+
+        try {
+            const response = await axios.get(endpoint,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            setValues(response.data.value);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/jobProvider/fetchUser',
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${localStorage.getItem('authToken')}`
-                        }
-                    }
-                );
-
-                setValues(response.data.value);
-
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
         fetchUserData();
     }, [])
 
@@ -49,8 +57,9 @@ function DashBoard() {
 
                             <div>
                                 <div className="overflow-x-auto rounded border border-gray-300 shadow-sm">
-
-                                    <UpdateProfile />
+                                    <UpdateProfile
+                                        fetchUserData={fetchUserData}
+                                    />
 
                                     <table className="min-w-full divide-y-2 divide-gray-200">
                                         <thead className="ltr:text-left rtl:text-right ">
@@ -60,27 +69,27 @@ function DashBoard() {
                                         <tbody className="divide-y divide-gray-200">
                                             <tr className="*:text-gray-900 *:first:font-medium">
                                                 <td className="px-3 py-2 whitespace-nowrap">Name of the Ferm</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.fermName}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{values == null ? "" : values.fermName}</td>
                                             </tr>
 
                                             <tr className="*:text-gray-900 *:first:font-medium">
                                                 <td className="px-3 py-2 whitespace-nowrap">Email Id</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.email}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{values == null ? "" : values.email}</td>
                                             </tr>
 
                                             <tr className="*:text-gray-900 *:first:font-medium">
                                                 <td className="px-3 py-2 whitespace-nowrap">Mobile Number</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.mobile}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{values == null ? "" : values.mobile}</td>
                                             </tr>
 
                                             <tr className="*:text-gray-900 *:first:font-medium">
                                                 <td className="px-3 py-2 whitespace-nowrap">Location</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.location}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{values == null ? "" : values.location}</td>
                                             </tr>
 
                                             <tr className="*:text-gray-900 *:first:font-medium">
                                                 <td className="px-3 py-2 whitespace-nowrap">About</td>
-                                                <td className="px-3 py-2 whitespace-nowrap">{ values==null ? "" :values.about}</td>
+                                                <td className="px-3 py-2 whitespace-nowrap">{values == null ? "" : values.about}</td>
                                             </tr>
 
                                         </tbody>

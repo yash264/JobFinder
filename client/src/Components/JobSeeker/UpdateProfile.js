@@ -45,7 +45,7 @@ function UpdateProfile({ fetchUserData }) {
         let token = '';
 
         if (userType === 'jobSeeker') {
-            endpoint = 'http://localhost:5000/api/jobSeeker/fetchUser';
+            endpoint = 'http://localhost:5000/api/jobSeeker/updateUser';
             token = localStorage.getItem('authToken');
         }
 
@@ -107,12 +107,6 @@ function UpdateProfile({ fetchUserData }) {
                             <h2 className="text-2xl font-semibold mb-4">
                                 Update Your Profile
                             </h2>
-
-                            {loading && (
-                                <div className="flex justify-center items-center my-4">
-                                    <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-                                </div>
-                            )}
 
                             <div className="flex flex-wrap -mx-2">
                                 <div className="w-full md:w-1/2 px-2 mb-4">
@@ -224,6 +218,12 @@ function UpdateProfile({ fetchUserData }) {
                                     </select>
                                 </div>
                             </div>
+
+                            {loading && (
+                                <div className="flex justify-center items-center my-4">
+                                    <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+                                </div>
+                            )}
 
                             <button
                                 className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"

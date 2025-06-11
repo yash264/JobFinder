@@ -11,7 +11,6 @@ function DashBoard() {
     const userType = localStorage.getItem('userType');
 
     const fetchUserData = async () => {
-
         let endpoint = '';
         let token = '';
 

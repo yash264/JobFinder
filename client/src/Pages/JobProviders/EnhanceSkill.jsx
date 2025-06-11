@@ -1,15 +1,15 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Navbar from "../../Components/JobProvider/Navbar";
 import SelectButton from "../../Components/SelectButton";
-import { ToastContainer, toast } from 'react-toastify';
 import Analysis from "../../Components/Analysis";
 
-function EnhanceSkill() {
 
+function EnhanceSkill() {
     const [score, setScore] = useState([])
     const [values, setValues] = useState([])
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         domain_expertise: '',
@@ -24,11 +24,12 @@ function EnhanceSkill() {
             ...formData,
             [e.target.id]: e.target.value,
         });
-        console.log(formData);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
         try {
             const response = await axios.post('http://127.0.0.1:5000/predict/jobProviders',
                 {
@@ -39,7 +40,7 @@ function EnhanceSkill() {
                     cultural_fit: formData.cultural_fit,
                 },
             );
-            console.log(response.data);
+
             setScore(response.data);
             setValues(response.data.recommendation[0]);
 
@@ -47,6 +48,8 @@ function EnhanceSkill() {
         catch (error) {
             console.log(error);
         }
+
+        setLoading(false);
     }
 
 
@@ -102,11 +105,17 @@ function EnhanceSkill() {
                                         value={formData.cultural_fit}
                                     />
 
+                                    {loading && (
+                                        <div className="flex justify-center items-center my-4">
+                                            <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+                                        </div>
+                                    )}
+
                                     <button
-                                        className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-500"
+                                        className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
                                         onClick={handleSubmit}
                                     >
-                                        Update Profile
+                                        Check Score
                                     </button>
                                 </div>
                             </div>
@@ -125,7 +134,6 @@ function EnhanceSkill() {
                     </div>
                 </section>
 
-                <ToastContainer />
             </div>
         </>
     )

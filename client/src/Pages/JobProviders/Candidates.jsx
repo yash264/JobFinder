@@ -2,18 +2,18 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import FetchProfile from "../../Components/JobProvider/FetchProfile";
 import Navbar from "../../Components/JobProvider/Navbar";
+import FetchProfile from "../../Components/JobProvider/FetchProfile";
 import Confirmation from "../../Components/JobProvider/Confirmation";
 
-function Candidates() {
 
+function Candidates() {
     const location = useLocation()
     const role = location.state.role;
-    console.log(role);
 
     const [values, setValues] = useState([]);
     const [query, setQuery] = useState("");
+
 
     const fetchCandidates = async () => {
         try {
@@ -28,7 +28,6 @@ function Candidates() {
                     }
                 }
             );
-            console.log(response.data.message);
 
             setValues(response.data.message);
         }
@@ -45,7 +44,8 @@ function Candidates() {
     useEffect(() => {
         if (query.trim() != '') {
             const filtered = values.filter((job) =>
-                job.role.toLowerCase().startsWith(query.toLowerCase())
+                job.name.toLowerCase().startsWith(query.toLowerCase()) ||
+                job.email.toLowerCase().startsWith(query.toLowerCase())
             );
             setValues(filtered);
         }
@@ -63,12 +63,11 @@ function Candidates() {
                 <section>
                     <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-4 lg:px-8">
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
-
                             <div>
                                 <input
                                     type="text"
                                     class="block w-full px-4 py-2 mb-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
-                                    placeholder="Search"
+                                    placeholder="Search based on Name and Email Id"
                                     onChange={(e) => setQuery(e.target.value)}
                                 />
                             </div>

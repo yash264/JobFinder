@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 function CreateJob({ fetchJobData }) {
-
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -51,18 +50,18 @@ function CreateJob({ fetchJobData }) {
 
             if (response.data.message === "job created") {
                 fetchJobData();
-                toast.success("Job Created Successfully");
+                toast.success("Job Created Successfully.");
             }
             else if (response.data === "role must be unique") {
-                toast.error("Role must be Unique");
+                toast.error("Role must be Unique.");
             }
             else {
-                toast.error("Some Error Occured");
+                toast.error("Some Error Occured.");
             }
         }
         catch (error) {
             console.log(error);
-            toast.error("Some Error Occurred");
+            toast.error("Some Error Occurred.");
         }
 
         setLoading(false);
@@ -72,17 +71,17 @@ function CreateJob({ fetchJobData }) {
 
     return (
         <>
-            <div className="flex justify-center m-1">
+            <div className="flex justify-center mb-3">
                 <button
-                    className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-500"
+                    className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
                     onClick={() => setIsOpen(true)}
                 >
-                    Create Job
+                    Create a Job
                 </button>
 
                 {isOpen && (
                     <div className="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center px-4">
-                        <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto relative mt-20 p-6">
+                        <div className="bg-white text-center rounded-lg shadow-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto relative mt-20 p-6">
 
                             <button
                                 className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
@@ -91,16 +90,9 @@ function CreateJob({ fetchJobData }) {
                                 ✖
                             </button>
 
-                            <h2 className="text-2xl font-semibold mb-4">Create a Job</h2>
-
-                            {loading && (
-                                <div class="flex justify-center items-center my-4 space-x-2">
-                                    <div class="w-4 h-4 bg-blue-500 rounded-full animate-bounce"></div>
-                                    <div class="w-4 h-4 bg-blue-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                                    <div class="w-4 h-4 bg-blue-500 rounded-full animate-bounce [animation-delay:0.4s]"></div>
-                                </div>
-                            )}
-
+                            <h2 className="text-2xl font-semibold mb-4">
+                                Create a Job
+                            </h2>
 
                             <div className="flex flex-wrap -mx-2">
                                 <div className="w-full md:w-1/2 px-2 mb-4">
@@ -113,7 +105,7 @@ function CreateJob({ fetchJobData }) {
                                         value={formData.role}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                        required
+                                        placeholder="Enter the desired Role"
                                     />
                                 </div>
 
@@ -127,6 +119,7 @@ function CreateJob({ fetchJobData }) {
                                         value={formData.salary}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="Enter salary offered"
                                     />
                                 </div>
                             </div>
@@ -142,7 +135,6 @@ function CreateJob({ fetchJobData }) {
                                         value={formData.eligibility}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                        required
                                     >
                                         <option selected >Choose...</option>
                                         <option>High School X</option>
@@ -164,7 +156,7 @@ function CreateJob({ fetchJobData }) {
                                         value={formData.skills}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                        required
+                                        placeholder="Enter the skills needed"
                                     />
                                 </div>
                             </div>
@@ -180,7 +172,6 @@ function CreateJob({ fetchJobData }) {
                                         value={formData.lastDate}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                        required
                                     />
                                 </div>
 
@@ -207,17 +198,23 @@ function CreateJob({ fetchJobData }) {
                                     type="text"
                                     id="about"
                                     rows={4}
-                                    placeholder="Tell us About your Ferm..."
+                                    placeholder="Tell us What you are looking..."
                                     value={formData.about}
                                     onChange={handleChange}
                                 />
                             </div>
 
+                            {loading && (
+                                <div className="flex justify-center items-center my-4">
+                                    <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+                                </div>
+                            )}
+
                             <button
-                                className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-500"
+                                className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
                                 onClick={handleSubmit}
                             >
-                                Save Changes
+                                Create a Job
                             </button>
 
                         </div>

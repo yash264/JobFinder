@@ -1,16 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export default function Confirmation({ role, email, status, fetchCandidates }) {
-
     const [isOpen, setIsOpen] = useState(false);
 
     const handleSubmit = async () => {
         setIsOpen(false);
-
-        console.log(role, email, status);
 
         try {
             const response = await axios.post('http://localhost:5000/api/acceptConfirmation',
@@ -25,14 +23,13 @@ export default function Confirmation({ role, email, status, fetchCandidates }) {
                     }
                 }
             );
-            console.log(response.data);
 
             if (response.data.message === "accepted") {
-                toast.success("Application Accepted Successfully");
+                toast.success("Application Accepted Successfully.");
                 fetchCandidates();
             }
             else {
-                toast.error("Some Error Occured");
+                toast.error("Some Error Occured.");
             }
         }
         catch (error) {
@@ -64,7 +61,7 @@ export default function Confirmation({ role, email, status, fetchCandidates }) {
             {
                 isOpen && (
                     <div className="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center px-4">
-                        <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto relative mt-20 p-6">
+                        <div className="bg-white rounded-lg text-center shadow-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto relative mt-20 p-6">
 
                             <button
                                 className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
@@ -78,16 +75,17 @@ export default function Confirmation({ role, email, status, fetchCandidates }) {
                             </h2>
 
                             <button
-                                className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-500"
+                                className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
                                 onClick={handleSubmit}
                             >
-                                Save Changes
+                                Yes, Accept it.
                             </button>
 
                         </div>
                     </div>
                 )
             }
+            
             <ToastContainer />
         </>
     );

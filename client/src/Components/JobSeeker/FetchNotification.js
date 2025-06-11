@@ -108,7 +108,7 @@ export default function FetchNotification({ notification, values, setValues, que
 
                             <tbody className="divide-y divide-gray-200">
                                 {
-                                    values === null ? "" : values.map((item) => {
+                                    values === null ? "" : values.reverse().map((item) => {
                                         return <tr className="*:text-gray-900 *:first:font-medium">
                                             <td className="px-3 py-2 whitespace-nowrap">{item.fermName}</td>
                                             <td className="px-3 py-2 whitespace-nowrap">{item.role}</td>
@@ -148,7 +148,7 @@ export default function FetchNotification({ notification, values, setValues, que
 
                             <tbody className="divide-y divide-gray-200">
                                 {
-                                    pastValues === null ? "" : pastValues.map((item) => {
+                                    pastValues === null ? "" : pastValues.reverse().map((item) => {
                                         return <tr className="*:text-gray-900 *:first:font-medium">
                                             <td className="px-3 py-2 whitespace-nowrap">{item.fermName}</td>
                                             <td className="px-3 py-2 whitespace-nowrap">{item.role}</td>

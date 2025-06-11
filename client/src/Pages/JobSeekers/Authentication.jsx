@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
 import { Auth } from "../../SvgImage/Auth";
 import Protected from "../../Helpers/Protected";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function Authentication() {
-
     const [login, setLogin] = useState(true);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -94,14 +93,19 @@ function Authentication() {
                         <div className="flex justify-between mb-6">
                             <button
                                 onClick={() => setLogin(true)}
-                                className={`flex-1 py-2 text-center font-semibold rounded-l-lg ${login ? 'bg-indigo-600' : 'bg-gray-700 hover:bg-gray-600'
-                                    }`}
+                                className={`flex-1 py-2 text-center font-semibold rounded-l-lg 
+                                    ${login ? 'bg-indigo-600' :
+                                        'bg-gray-700 hover:bg-gray-600'
+                                    }`
+                                }
                             >
                                 Login
                             </button>
                             <button
                                 onClick={() => setLogin(false)}
-                                className={`flex-1 py-2 text-center font-semibold rounded-r-lg ${!login ? 'bg-indigo-600' : 'bg-gray-700 hover:bg-gray-600'
+                                className={`flex-1 py-2 text-center font-semibold rounded-r-lg 
+                                    ${!login ? 'bg-indigo-600' :
+                                        'bg-gray-700 hover:bg-gray-600'
                                     }`}
                             >
                                 Register
@@ -120,6 +124,7 @@ function Authentication() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="Enter valid Email Id"
                                         required
                                     />
                                 </div>
@@ -134,6 +139,7 @@ function Authentication() {
                                         value={formData.password}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="Enter your Password"
                                         required
                                     />
                                 </div>
@@ -165,6 +171,7 @@ function Authentication() {
                                         value={formData.name}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="Enter your Name"
                                         required
                                     />
                                 </div>
@@ -179,6 +186,7 @@ function Authentication() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="Enter valid Email Id"
                                         required
                                     />
                                 </div>
@@ -193,6 +201,7 @@ function Authentication() {
                                         value={formData.password}
                                         onChange={handleChange}
                                         className="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="Enter your Password"
                                         required
                                     />
                                 </div>
