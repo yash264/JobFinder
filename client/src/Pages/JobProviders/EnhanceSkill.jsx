@@ -26,12 +26,14 @@ function EnhanceSkill() {
         });
     };
 
+    axios.defaults.withCredentials = true;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            const response = await axios.post('http://127.0.0.1:5000/predict/jobProviders',
+            const response = await axios.post('https://jobfinderflaskserver.onrender.com/predict/jobProviders',
                 {
                     domain_expertise: formData.domain_expertise,
                     communication_skill: formData.communication_skill,

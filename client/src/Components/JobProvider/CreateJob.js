@@ -25,12 +25,13 @@ function CreateJob({ fetchJobData }) {
         });
     };
 
+    axios.defaults.withCredentials = true;
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
         try {
-            const response = await axios.post('http://localhost:5000/api/jobCreate',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/jobCreate',
                 {
                     role: formData.role,
                     salary: formData.salary,

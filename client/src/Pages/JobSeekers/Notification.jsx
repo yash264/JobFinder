@@ -10,10 +10,11 @@ function Notification() {
     const [query, setQuery] = useState('');
     const [notification, setNotification] = useState(true);
 
-
+    axios.defaults.withCredentials = true;
+    
     const fetchNotification = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/fetchNotification',
+            const response = await axios.get('https://jobfinderserver.onrender.com/api/fetchNotification',
                 {
                     headers: {
                         'Content-Type': 'application/json',

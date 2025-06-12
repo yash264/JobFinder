@@ -6,8 +6,9 @@ export default function Protected() {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
+    axios.defaults.withCredentials = true;
 
+    useEffect(() => {
         const verifyUser = async () => {
             const token = localStorage.getItem("authToken");
             const userType = localStorage.getItem("userType");
@@ -39,10 +40,10 @@ export default function Protected() {
         let endpoint;
 
         if (userType === "jobSeeker") {
-            endpoint = "http://localhost:5000/api/jobSeeker/verifyToken";
+            endpoint = "https://jobfinderserver.onrender.com/api/jobSeeker/verifyToken";
         }
         else if (userType === "jobProvider") {
-            endpoint = "http://localhost:5000/api/jobProvider/verifyToken";
+            endpoint = "https://jobfinderserver.onrender.com/api/jobProvider/verifyToken";
         }
         else{
             return false;

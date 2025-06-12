@@ -12,10 +12,11 @@ function Recruitement() {
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
 
-
+    axios.defaults.withCredentials = true;
+    
     const fetchJobData = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/fetchJob',
+            const response = await axios.get('https://jobfinderserver.onrender.com/api/fetchJob',
                 {
                     headers: {
                         'Content-Type': 'application/json',

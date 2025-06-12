@@ -12,12 +12,13 @@ function ApplicationWindow() {
     const location = useLocation()
     const email = location.state.email;
     const role = location.state.role;
-
     const [values, setValues] = useState([]);
+
+    axios.defaults.withCredentials = true;
 
     const showDetails = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/application',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/application',
                 {
                     email: email,
                     role: role,

@@ -7,11 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 export default function Confirmation({ role, email, status, fetchCandidates }) {
     const [isOpen, setIsOpen] = useState(false);
 
+    axios.defaults.withCredentials = true;
+    
     const handleSubmit = async () => {
         setIsOpen(false);
-
         try {
-            const response = await axios.post('http://localhost:5000/api/acceptConfirmation',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/acceptConfirmation',
                 {
                     email: email,
                     role: role,

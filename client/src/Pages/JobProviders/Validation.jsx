@@ -24,14 +24,15 @@ function Validation() {
         });
     };
 
+    axios.defaults.withCredentials = true;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         const url = login
-            ? 'http://localhost:5000/api/jobProvider/login'
-            : 'http://localhost:5000/api/jobProvider/register';
+            ? 'https://jobfinderserver.onrender.com/api/jobProvider/login'
+            : 'https://jobfinderserver.onrender.com/api/jobProvider/register';
 
         const payload = login
             ? { email: formData.email, password: formData.password }

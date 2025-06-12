@@ -25,12 +25,14 @@ function Recommendation() {
         });
     };
 
+    axios.defaults.withCredentials = true;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            const response = await axios.post('http://127.0.0.1:5000/predict/jobSeekers',
+            const response = await axios.post('https://jobfinderflaskserver.onrender.com/predict/jobSeekers',
                 {
                     techincal_skill: formData.techincal_skill,
                     communication_skill: formData.communication_skill,

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Element } from 'react-scroll';
+import axios from "axios";
 
 import Home from "./Pages/Home";
 import Features from "./Pages/Features";
@@ -30,6 +31,26 @@ function App() {
   const hideGlobalComponents =
     location.pathname.startsWith("/jobSeeker/communitySection") ||
     location.pathname.startsWith("/jobProvider/communitySection");
+
+  axios.defaults.withCredentials = true;
+
+  const startServers = async () => {
+    try {
+      const flaskResponse = await axios.get('https://jobfinderflaskserver.onrender.com/startFlaskServer');
+      console.log("Flask Server", flaskResponse.data.message);
+
+      const nodeResponse = await axios.get('https://jobfinderserver.onrender.com/startServer');
+      console.log("Node Server", nodeResponse.data);
+
+    } catch (error) {
+      console.error("Error waking servers:", error);
+    }
+  };
+
+  useEffect(() => {
+    startServers();
+  }, []);
+
 
   return (
     <>

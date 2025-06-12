@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 # set the cors value
 cors_options = {
-    "origins": "http://localhost:3000",
+    "origins": "https://jobfinder-meta.vercel.app",
     "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"],
     "allow_headers": ["Content-Type", "Authorization"],
     "supports_credentials": True
@@ -134,11 +134,11 @@ def jobProviders():
 
 
 #  start the server on hosting
-# @app.route("/startServer", methods=['GET'])
-# def start_server():
-#     return jsonify({
-#         "message": "Server started successfully!"
-#     })
+@app.route("/startFlaskServer", methods=['GET'])
+def start_server():
+    return jsonify({
+        "message": "Server started successfully!"
+    })
 
 
 if __name__ == '__main__':

@@ -23,15 +23,16 @@ function Authentication() {
             [e.target.id]: e.target.value,
         });
     };
-
+    
+    axios.defaults.withCredentials = true;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         const url = login
-            ? 'http://localhost:5000/api/jobSeeker/login'
-            : 'http://localhost:5000/api/jobSeeker/register';
+            ? 'https://jobfinderserver.onrender.com/api/jobSeeker/login'
+            : 'https://jobfinderserver.onrender.com/api/jobSeeker/register';
 
         const payload = login
             ? { email: formData.email, password: formData.password }

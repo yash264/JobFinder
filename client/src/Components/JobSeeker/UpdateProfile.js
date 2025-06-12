@@ -36,7 +36,8 @@ function UpdateProfile({ fetchUserData }) {
         }
     }, [formData.state, formData.city]);
 
-
+    axios.defaults.withCredentials = true;
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -45,7 +46,7 @@ function UpdateProfile({ fetchUserData }) {
         let token = '';
 
         if (userType === 'jobSeeker') {
-            endpoint = 'http://localhost:5000/api/jobSeeker/updateUser';
+            endpoint = 'https://jobfinderserver.onrender.com/api/jobSeeker/updateUser';
             token = localStorage.getItem('authToken');
         }
 

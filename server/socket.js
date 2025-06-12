@@ -5,8 +5,8 @@ const { fetchAllGroup, CreateGroup, SendMessage, fetchMessages } = require("./co
 function initSocket(server) {
     const io = new Server(server, {
         cors: {
-            origin: ["http://localhost:3000"],
-            methods: ["GET", "POST"],
+            origin: "https://jobfinder-meta.vercel.app",
+            methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
             credentials: true,
         }
     });
@@ -14,12 +14,10 @@ function initSocket(server) {
     io.on("connection", (socket) => {
         console.log("New socket connection:", socket.id);
 
-        // Join room
         socket.on("joinGroup", (data) => {
             socket.join(data.groupName);
         });
 
-        // Leave room
         socket.on("leaveGroup", (data) => {
             socket.leave(data.groupName);
         });

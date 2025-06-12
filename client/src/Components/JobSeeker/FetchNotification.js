@@ -32,9 +32,11 @@ export default function FetchNotification({ notification, values, setValues, que
         }
     }
 
+    axios.defaults.withCredentials = true;
+
     const showPastApplication = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/fetchPastApplication',
+            const response = await axios.get('https://jobfinderserver.onrender.com/api/fetchPastApplication',
                 {
                     headers: {
                         'Content-Type': 'application/json',

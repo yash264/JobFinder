@@ -21,7 +21,7 @@ const EmploymentRoute = require("./routes/Employment.route");
 const ApplicationRoute = require("./routes/Application.route");
 
 const corsOptions ={
-    origin: "http://localhost:3000",
+    origin: "https://jobfinder-meta.vercel.app",
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
 }; 
@@ -51,6 +51,10 @@ app.use("/api", ApplicationRoute)
 const server = http.createServer(app);
 initSocket(server);
 
+
+app.get('/startServer', (req, res) => {
+    res.status(200).send("Started the Server");
+})
 
 server.listen(port, () => {
     console.log( `Server is running at ${port}`)

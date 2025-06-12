@@ -14,10 +14,11 @@ function Candidates() {
     const [values, setValues] = useState([]);
     const [query, setQuery] = useState("");
 
-
+    axios.defaults.withCredentials = true;
+    
     const fetchCandidates = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/fetchCandidates',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/fetchCandidates',
                 {
                     role: role,
                 },

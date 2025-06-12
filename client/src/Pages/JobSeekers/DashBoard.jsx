@@ -10,12 +10,14 @@ function DashBoard() {
     const [values, setValues] = useState([])
     const userType = localStorage.getItem('userType');
 
+    axios.defaults.withCredentials = true;
+
     const fetchUserData = async () => {
         let endpoint = '';
         let token = '';
 
         if (userType === 'jobSeeker') {
-            endpoint = 'http://localhost:5000/api/jobSeeker/fetchUser';
+            endpoint = 'https://jobfinderserver.onrender.com/api/jobSeeker/fetchUser';
             token = localStorage.getItem('authToken');
         }
 

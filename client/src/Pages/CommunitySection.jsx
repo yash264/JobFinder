@@ -6,13 +6,16 @@ import Navbar from "../Components/JobSeeker/Navbar";
 import CreateGroup from "../Components/CreateGroup";
 import Conversation from "../Components/Conversation";
 
-const socket = io('http://localhost:5000');
+const socket = io('https://jobfinderserver.onrender.com', {
+    withCredentials: true
+});
 
 
 function CommunitySection() {
     const [selectGroup, setSelectGroup] = useState([]);
     const [profileData, setProfileData] = useState([]);
 
+    axios.defaults.withCredentials = true; 
 
     const fetchUserData = async () => {
         const token = localStorage.getItem("authToken");
@@ -21,10 +24,10 @@ function CommunitySection() {
         let endpoint;
 
         if (userType === "jobSeeker") {
-            endpoint = 'http://localhost:5000/api/jobSeeker/fetchUser';
+            endpoint = 'https://jobfinderserver.onrender.com/api/jobSeeker/fetchUser';
         }
         else if (userType === "jobProvider") {
-            endpoint = 'http://localhost:5000/api/jobProvider/fetchUser';
+            endpoint = 'https://jobfinderserver.onrender.com/api/jobProvider/fetchUser';
         }
 
         try {

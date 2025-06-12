@@ -7,12 +7,12 @@ function FetchProfile({ role, email }) {
     const [values, setValues] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
 
+    axios.defaults.withCredentials = true;
 
     const fetchProfile = async () => {
         setIsOpen(true);
-
         try {
-            const response = await axios.post('http://localhost:5000/api/fetchProfile',
+            const response = await axios.post('https://jobfinderserver.onrender.com/api/fetchProfile',
                 {
                     role: role,
                     email: email,
