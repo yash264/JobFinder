@@ -34,11 +34,8 @@ function App() {
 
   axios.defaults.withCredentials = true;
 
-  const startServers = async () => {
+  const startNodeServer = async () => {
     try {
-      const flaskResponse = await axios.get('https://jobfinderflaskserver.onrender.com/startFlaskServer');
-      console.log("Flask Server", flaskResponse.data.message);
-
       const nodeResponse = await axios.get('https://jobfinderserver.onrender.com/startServer');
       console.log("Node Server", nodeResponse.data);
 
@@ -47,8 +44,19 @@ function App() {
     }
   };
 
+  const startFlaskServer = async () => {
+    try {
+      const flaskResponse = await axios.get('https://jobfinderflaskserver.onrender.com/startFlaskServer');
+      console.log("Flask Server", flaskResponse.data.message);
+
+    } catch (error) {
+      console.error("Error waking servers:", error);
+    }
+  };
+
   useEffect(() => {
-    startServers();
+    startNodeServer();
+    startFlaskServer();
   }, []);
 
 
