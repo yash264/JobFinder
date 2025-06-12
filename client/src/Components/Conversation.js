@@ -46,7 +46,7 @@ export default function Conversation({ socket, selectGroup, profileData }) {
     const bottomRef = useRef(null);
 
     useEffect(() => {
-        if (bottomRef.current && (values.length>3)) {
+        if (bottomRef.current && (values.length>0)) {
             bottomRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [values]);
