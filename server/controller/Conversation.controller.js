@@ -1,4 +1,5 @@
-const conversationData = require("../schema/conversationData");
+const conversationData = require("../schema/ConversationData");
+
 
 const fetchAllGroup = async (socket) => {
     try {
