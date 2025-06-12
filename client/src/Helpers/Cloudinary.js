@@ -54,11 +54,13 @@ export default function CLoudinary({ onUpload, acceptedType, label }) {
                     required
                 />
 
-                {uploading &&
-                    <div className="spinner-border text-primary mt-2" role="status">
-                        <span className="visually-hidden">Uploading...</span>
+                {uploading && (
+                    <div className="flex justify-center w-full">
+                        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
                     </div>
-                }
+                )}
             </div>
         </>
     )

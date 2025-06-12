@@ -162,8 +162,10 @@ function ApplicationForm({ values }) {
                             </h3>
 
                             {loading && (
-                                <div className="flex justify-center items-center my-4">
-                                    <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+                                <div className="flex justify-center w-full">
+                                    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </div>
                                 </div>
                             )}
 
