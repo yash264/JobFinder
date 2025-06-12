@@ -67,7 +67,7 @@ function ApplicationForm({ values }) {
 
     const handlePdfUpload = (url) => {
         setFormData((prev) => ({ ...prev, pdfUrl: url }));
-        toast.success("PDF uploaded successfully!");
+        toast.success("Document uploaded successfully!");
     };
 
 

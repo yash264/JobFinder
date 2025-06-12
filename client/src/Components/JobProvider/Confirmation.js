@@ -51,9 +51,9 @@ export default function Confirmation({ role, email, status, fetchCandidates }) {
                 ) : (
                     <button
                         onClick={() => setIsOpen(true)}
-                        className="px-4 py-2 text-gray-700 border border-gray-400 rounded-md hover:bg-gray-100 transition duration-200"
+                        className="px-4 py-2 text-gray-700 border border-gray-400 rounded-md hover:bg-gray-200 transition duration-200"
                     >
-                        Accept Application
+                        click here
                     </button>
                 )}
             </td>

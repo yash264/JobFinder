@@ -60,7 +60,7 @@ const Header = () => {
                                     to="../jobProvider/validation"
                                     className="rounded-md bg-rose-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-rose-700"
                                 >
-                                    Admin Corner
+                                    Job Providers
                                 </Link>
                             </div>
 

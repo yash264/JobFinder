@@ -2,8 +2,6 @@ const jobProviderData = require("../schema/JobProviderData");
 const employmentData = require("../schema/EmploymentData");
 const applicationData = require("../schema/ApplicationData");
 
-//const { congratulationMail } = require("../SendMail/congratulationMail");
-
 
 const fetchNotification = async (req, res) => {
     try {

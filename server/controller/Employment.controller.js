@@ -1,8 +1,11 @@
 const moment = require("moment");
 const jobSeekerData = require("../schema/JobSeekerData");
+const jobProviderData = require("../schema/JobProviderData");
 const employmentData = require("../schema/EmploymentData");
 const applicationData = require("../schema/ApplicationData");
 
+
+const { congratulation } = require("../SendMail/congratulation");
 
 const jobCreate = async (req, res) => {
     try {
@@ -129,8 +132,19 @@ const acceptConfirmation = async (req, res) => {
                 }
             );
 
+            const fermExists = await jobProviderData.findOne(
+                {
+                    _id: req.user.id,
+                }
+            );
+
+            const name = personExists.name;
+            const email = personExists.email;
+            const fermName = fermExists.fermName;
+            const role = req.body.role;
+
             // to send the mail
-            //congratulationMail(req.body.name, req.body.email, req.user.ferm, req.body.role);
+            congratulation(name, email, fermName, role);
 
             res.status(201).json({
                 success: true,

@@ -1,15 +1,18 @@
 const dotenv = require('dotenv')
 const path = require('path');
 
-const JobProviderData = require("../schema/JobProviderData");
+const jobProviderData = require("../schema/JobProviderData");
 const jwt = require("jsonwebtoken");
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
-//const { registrationMail } = require("../SendMail/registrationMail"); 
 
+
+const { registration } = require("../SendMail/registration");
 
 const register = async (req, res) => {
     try {
-        const ifExists = await JobProviderData.findOne({ gmail: req.body.payload.email });
+        const { name, email } = req.body.payload;
+
+        const ifExists = await jobProviderData.findOne({ gmail: req.body.payload.email });
 
         if (ifExists) {
             res.status(201).json(
@@ -20,7 +23,7 @@ const register = async (req, res) => {
             );
         }
         else {
-            const registerPerson = new JobProviderData({
+            const registerPerson = new jobProviderData({
                 fermName: req.body.payload.fermName,
                 email: req.body.payload.email,
                 password: req.body.payload.password
@@ -28,7 +31,7 @@ const register = async (req, res) => {
             const registered = await registerPerson.save();
 
             // to send the mail
-            //registrationMail(req.body.ferm, req.body.gmail);
+            registration(name, email);
 
             res.status(201).json({
                 success: true,
@@ -44,7 +47,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body.payload;
-        const ifExists = await JobProviderData.findOne({ email: email })
+        const ifExists = await jobProviderData.findOne({ email: email })
 
         if (ifExists) {
             if (ifExists.password == password) {
@@ -101,7 +104,7 @@ const verifyToken = async (req, res) => {
 
 const fetchUser = async (req, res) => {
     try {
-        const fetchUserData = await JobProviderData
+        const fetchUserData = await jobProviderData
             .findOne({ _id: req.user.id })
             .select("-password");
 
@@ -117,7 +120,7 @@ const fetchUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const updatedUser = await JobProviderData.updateOne({ _id: req.user.id },
+        const updatedUser = await jobProviderData.updateOne({ _id: req.user.id },
             {
                 fermName: req.body.fermName,
                 mobile: req.body.mobile,
