@@ -22,7 +22,7 @@ function ChatBot() {
 
     const modifiedQuery = `Please provide a detailed explanation of ${query} in approximately 200-300 words.`;
 
-    axios.defaults.withCredentials = true;
+    axios.defaults.withCredentials = false;
     
     const handleSubmit = async () => {
         if (!query.trim()) return;
