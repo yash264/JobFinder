@@ -10,7 +10,7 @@ const { registration } = require("../SendMail/registration");
 
 const register = async (req, res) => {
     try {
-        const { name, email } = req.body.payload;
+        const { fermName, email } = req.body.payload;
 
         const ifExists = await jobProviderData.findOne({ gmail: req.body.payload.email });
 
@@ -31,7 +31,7 @@ const register = async (req, res) => {
             const registered = await registerPerson.save();
 
             // to send the mail
-            registration(name, email);
+            registration(fermName, email);
 
             res.status(201).json({
                 success: true,
