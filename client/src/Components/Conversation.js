@@ -30,7 +30,7 @@ export default function Conversation({ socket, selectGroup, profileData }) {
 
         socket.emit("sendMessage", {
             groupName: selectGroup.groupName,
-            name: profileData.name,
+            name: profileData.name || profileData.fermName,
             email: profileData.email,
             type: formData.type,
             value: formData.value,
