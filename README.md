@@ -8,7 +8,7 @@ Employment is more than income — it empowers individuals, boosts self-esteem, 
 
 ---
 
-## 🌐 Live Demo
+## 🌐 Live Link
 
 🚀 [Visit Job Finder](https://jobfinder-meta.vercel.app)
 
@@ -47,6 +47,12 @@ Employment is more than income — it empowers individuals, boosts self-esteem, 
 - 🧾 Register as fresh candidates and manage their profile information.  
 - 🎯 After updating their profile, they can apply to available job opportunities.  
 - 📎 During registration or job application, they can upload the required supporting documents.
+
+---
+
+## 🌐 Live Video Tutorial
+
+🚀 [Watch It](https://youtu.be/Rk5TgP_4Bhw)
 
 ---
 
