@@ -158,11 +158,18 @@ export default function Conversation({ socket, selectGroup, profileData }) {
 
                                     {item.type === "image" && (
                                         <div className="flex justify-center w-full">
-                                            <img
-                                                src={item.value}
-                                                alt="Uploaded Image"
-                                                className="w-24 h-24 rounded object-cover border-2 border-indigo-500 shadow-md"
-                                            />
+                                            <a
+                                                href={item.value}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-block text-gray-900 hover:underline transition duration-200 font-medium"
+                                            >
+                                                <img
+                                                     src={item.value}
+                                                     alt="Uploaded Image"
+                                                     className="w-24 h-24 rounded object-cover border-2 border-indigo-500 shadow-md"
+                                                />
+                                            </a>
                                         </div>
                                     )}
 
